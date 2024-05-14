@@ -1,0 +1,75 @@
+﻿<Window x:Class="Bank.Log_in"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Log_in" Height="800" Width="1440" Icon="/1.ico" Background="#FF03045E">
+
+    <Window.Resources>
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="TextTrimming" Value="None"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid Width="580" Height="auto" HorizontalAlignment="Left">
+            <Rectangle Width="580" Height="900" Fill="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Image x:Name="img_logo" Source="Photo/logo.png" HorizontalAlignment="Center" Width="560" VerticalAlignment="Top" Margin="0,10,0,0">
+                <Image.OpacityMask>
+                    <ImageBrush ImageSource="Photo/logo.png"/>
+                </Image.OpacityMask>
+            </Image>
+            <Label x:Name="label_slogan" Content="Банк для кожного!" FontFamily="Tenor Sans" FontSize="36" Foreground="#FF03045E" HorizontalAlignment="Center" Height="50" Width="350" VerticalAlignment="Center" Margin="0,111,0,0"/>
+        </Grid>
+
+        <Label x:Name="label_sign_up" Content="АУТЕНТИФІКАЦІЯ" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Tenor Sans" FontSize="64" Height="79" Width="646" Foreground="White" Margin="0,45,107,0"/>
+
+        <Grid Width="800" Height="140" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="375"/>
+                <ColumnDefinition Width="375"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="label_login" Grid.Column="0" Content="Номер телефону "  FontFamily="Tenor Sans" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Foreground="White" Margin="11,0,0,0"/>
+            <TextBox x:Name="textBox_login" Grid.Row="0" Grid.Column="2" TextWrapping="Wrap"  FontFamily="Tenor Sans" FontSize="40" Height="50" Background="#ADADC8" Margin="25,0,-25,0"/>
+
+
+            <Label x:Name="label_password" Grid.Column="0" Content="Пароль  " FontFamily="Tenor Sans" FontSize="40" HorizontalAlignment="Right" Grid.ColumnSpan="3" Foreground="White" Grid.Row="1" Margin="0,21,370,-30" RenderTransformOrigin="0.503,1.088"/>
+            <TextBox x:Name="textBox_password" Grid.Row="1" Grid.Column="2" FontFamily="Tenor Sans" FontSize="40" Height="50" Background="#ADADC8" Margin="25,21,-25,-21" Visibility="Hidden"/>
+            <PasswordBox x:Name="passwordBox_password" Grid.Row="1" Grid.Column="2" FontFamily="Tenor Sans" FontSize="40" Height="50" Background="#ADADC8" Margin="25,21,-25,-21"/>
+            <CheckBox Name="checkBox" Content="Show password" Grid.Column="2" HorizontalAlignment="Left" Margin="452,547,0,0" VerticalAlignment="Top" />
+            <Image x:Name="img_password_yes" Grid.Row="1" Grid.Column="2" Source="/Photo/password_yes.png" MouseLeftButtonDown="Img_password_MouseLeftButtonDown" Cursor="Hand" Margin="334,22,-27,-20"/>
+            <Image x:Name="img_password_no" Grid.Row="1" Grid.Column="2" Source="/Photo/password_no.png" MouseLeftButtonDown="Img_password_MouseLeftButtonDown" Cursor="Hand" Margin="334,22,-27,-20"/>
+
+
+        </Grid>
+
+        <Button x:Name="button_Log_in" Content="Увійти" FontFamily="Tenor Sans" FontSize="48" Height="73" Width="292" Background="White" HorizontalAlignment="Right" 
+        VerticalAlignment="Bottom" Click="button_Log_in_Click" Cursor="Hand" Margin="0,0,254,110">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="40">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="3"/>
+                        </Border.Effect>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <TextBlock Style="{DynamicResource TextBlockStyle}" x:Name="sign_up_label" Text="Ще немає акаунту?" FontFamily="Tenor Sans" HorizontalAlignment="Right" Background="#ADADC8"  
+            Foreground="Black" FontSize="36" Height="42" Width="404" TextDecorations="Underline" MouseLeftButtonDown="SignUpLabel_Click" Cursor="Hand" TextAlignment="Center" VerticalAlignment="Bottom" RenderTransformOrigin="-2,0" Margin="0,0,198,35"/>
+
+    </Grid>
+
+</Window>

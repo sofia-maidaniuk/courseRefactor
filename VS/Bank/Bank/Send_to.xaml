@@ -1,0 +1,71 @@
+﻿<Window x:Class="Bank.Send_to"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank"
+        mc:Ignorable="d"
+        Title="Send_to" Height="800" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FF03045E" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Photo/3.png" Width="110" Height="110" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,5,10,0"/>
+                <TextBlock Text="LABANK" Foreground="White" FontFamily="Tenor Sans" FontSize="36" Height="45" VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="3" Background="#FF03045E" Margin="0,0,0,0">
+            <TextBlock x:Name="exit_label" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontFamily="Tenor Sans" MouseLeftButtonDown="Exit_Click" Cursor="Hand" Margin="0,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Photo/exit.png" Width="60" Height="60" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/> 
+                    <TextBlock Text="Вихід" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>   
+            </TextBlock>   
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,0,0,0">
+            <Border x:Name="from" Width="470" Height="310" CornerRadius="66" Background="#ADADC8" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            <Border x:Name="to" Width="470" Height="310" CornerRadius="66" Background="#ADADC8" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0"/>
+            <StackPanel Orientation="Vertical">
+                <Label x:Name="label_from" Content="З КАРТИ" FontFamily="Tenor Sans" FontSize="24" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,30,0,0"/>
+                <Label x:Name="label_cardNumber" Content="{Binding CardNumber}" FontFamily="Tenor Sans" FontSize="30" Foreground="White" Height="40" Width="400" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,30,0,0"/>
+                <StackPanel Margin="30,60,12,10" Orientation="Horizontal" Width="450" HorizontalAlignment="Left">
+                    <Label x:Name="label_cvvText" Content="CVV: " FontSize="16" FontFamily="Tenor Sans" Foreground="White" Height="30"/>
+                    <Label  x:Name="label_cvvCode" Content="{Binding CVV}" FontFamily="Tenor Sans" FontSize="16" Foreground="White" Height="30" Width="100" RenderTransformOrigin="0.506,0.545" MouseDoubleClick="label_cvvCode_click"/>
+                    <Label x:Name="label_dateText" Content="Терм. дії: " FontSize="16" FontFamily="Tenor Sans" Foreground="White" Height="30" Margin="60,0,0,0"/>
+                    <Label x:Name="label_date" Content="{Binding ExpiryDate}" FontFamily="Tenor Sans" FontSize="16" Foreground="White" Height="30" Width="100" Margin="0,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label x:Name="label_to" Content="КАРТА ОТРИМУВАЧА" FontFamily="Tenor Sans" FontSize="24" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="350,30,0,0"/>
+                <Label x:Name="label_cardNumber_to" Content="{Binding CardNumber}" FontFamily="Tenor Sans" FontSize="30" Foreground="White" Height="40" Width="400" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="480,30,0,0"/>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0,0,0,0">
+            <Border x:Name="amount" Width="520" Height="100" CornerRadius="50" Background="#E6E6F5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            <Border x:Name="suma" Width="180" Height="100" CornerRadius="50" Background="#ADADC8" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            <Label x:Name="label_suma" Content="Сума" FontFamily="Tenor Sans" FontSize="40" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
+            <TextBox x:Name="textBox_sum" FontFamily="Tenor Sans" FontSize="40" Background="Transparent" BorderBrush="Transparent" Width="250" Height="70" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="210,0,0,0"/>
+
+            <Button x:Name="button_send_to" Content="Переказати" FontFamily="Tenor Sans" Background="#03045E"
+            FontSize="36" Height="100" Width="350"  HorizontalAlignment="Right" Cursor="Hand" Click="button_send_to_Click" VerticalAlignment="Center" Foreground="White" Margin="0,0,70,0">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

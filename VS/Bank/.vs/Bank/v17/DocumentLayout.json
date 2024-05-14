@@ -1,0 +1,138 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\course-1-main\\vs\\bank\\bank\\sign_up.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\sign_up.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\bank\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\bank\\log_in.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\log_in.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\bank\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\bank\\choosepassword.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\choosepassword.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\bank\\choosepassword.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\choosepassword.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\bank\\log_in.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\log_in.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 348,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChoosePassword.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\ChoosePassword.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\ChoosePassword.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\ChoosePassword.xaml.cs",
+              "RelativeToolTip": "Bank\\ChoosePassword.xaml.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAwwDgAAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-16T21:33:06.112Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ChoosePassword.xaml",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\ChoosePassword.xaml",
+              "RelativeDocumentMoniker": "Bank\\ChoosePassword.xaml",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\ChoosePassword.xaml",
+              "RelativeToolTip": "Bank\\ChoosePassword.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-16T21:27:58.749Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Log_in.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\Log_in.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\Log_in.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\Log_in.xaml.cs",
+              "RelativeToolTip": "Bank\\Log_in.xaml.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAYwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-16T21:25:13.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Bank\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAowCwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-16T20:08:47.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Sign_up.xaml",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\Sign_up.xaml",
+              "RelativeDocumentMoniker": "Bank\\Sign_up.xaml",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\Sign_up.xaml",
+              "RelativeToolTip": "Bank\\Sign_up.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-03-23T18:46:17.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Log_in.xaml",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\Log_in.xaml",
+              "RelativeDocumentMoniker": "Bank\\Log_in.xaml",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\Log_in.xaml",
+              "RelativeToolTip": "Bank\\Log_in.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-16T14:21:48.103Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Bank\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\course-1-main\\VS\\Bank\\Bank\\MainWindow.xaml",
+              "RelativeToolTip": "Bank\\MainWindow.xaml",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAiwCAAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-16T19:16:46.632Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
