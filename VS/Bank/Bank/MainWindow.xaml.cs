@@ -78,7 +78,6 @@ namespace Bank
             if (cardsComboBox.SelectedIndex > 0)
             {
                 string selectedCardNumber = cardsComboBox.SelectedItem.ToString();
-
                 SelectBankCard(selectedCardNumber);
             }
         }
@@ -116,6 +115,7 @@ namespace Bank
 
                 label_cvvCode.Content = reader[1].ToString();
                 label_date.Content = reader[2].ToString();
+                DataStorage.expiryDate = label_date.Content.ToString();
                 paySystem = reader[3].ToString();
                 label_currency.Content = reader[4].ToString();
                 label_balance.Content = reader[5].ToString();
@@ -143,22 +143,20 @@ namespace Bank
         private void label_cvvCode_click(object sender, MouseButtonEventArgs e)
         {
             if (label_cvvCode.Content.ToString() == "***")
-            {
                 label_cvvCode.Content = DataStorage.cvvCode;
-            }
             else
-            {
-                label_cvvCode.Content = "****";
-            }
+                label_cvvCode.Content = "***";
         }
         private void button_transfer_Click(object sender, RoutedEventArgs e)
         {
-            Send_to sendToWindow = new Send_to(clientId);
             DataStorage.bankCard = cardNumberTransaction_texBox.Text;
             DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
             cardsComboBox.Text = "";
+
+            Send_to sendToWindow = new Send_to(clientId, DataStorage.bankCard, DataStorage.cardNumber, DataStorage.cvvCode, DataStorage.expiryDate);
             sendToWindow.Show();
         }
+
 
         private void updateImage_click(object sender, RoutedEventArgs e)
         {

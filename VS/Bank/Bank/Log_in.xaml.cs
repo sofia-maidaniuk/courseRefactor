@@ -49,7 +49,7 @@ namespace Bank
                 this.Close();
             }
             else
-                MessageBox.Show("Такого акаунту не існує або \nне правильний пароль!", "Акаунту не існує!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Такого акаунту не існує або \nНе правильний пароль!", "Акаунту не існує!", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void Log_in_KeyDown(object sender, KeyEventArgs e)
@@ -79,13 +79,11 @@ namespace Bank
             }
             else
             {
-                passwordBox_password.Password = textBox_password.Text;
                 textBox_password.Visibility = Visibility.Hidden;
                 passwordBox_password.Visibility = Visibility.Visible;
                 img_password_yes.Visibility = Visibility.Hidden;
                 img_password_no.Visibility = Visibility.Visible;
             }
         }
-
     }
 }

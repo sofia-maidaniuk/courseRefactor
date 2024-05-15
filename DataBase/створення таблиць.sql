@@ -35,3 +35,5 @@ create table Transactions(
   transactionNumber nvarchar(50),
   transactionValue money
 );
+
+update BankingCard set balance = 50000 where ID_Card=3

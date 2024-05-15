@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bank.DataClasses
 {
-    class DataStorage
+    internal class DataStorage
     {
         public static int attempts;
         public static int idKlient;
@@ -14,5 +14,6 @@ namespace Bank.DataClasses
         public static string phone_Number;
         public static string cardNumber;
         public static string cvvCode;
+        public static string expiryDate;
     }
 }
