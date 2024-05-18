@@ -22,12 +22,24 @@ namespace Bank
     {
         DataBase DataBase = new DataBase();
         private readonly int _clientId;
-        
+
         public Profil(int clientId)
         {
             InitializeComponent();
             _clientId = clientId;
             Loaded += Profil_Loaded;
+        }
+
+        private void button_changeAvatar_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string imagePath = openFileDialog.FileName;
+                BitmapImage bitmap = new BitmapImage(new Uri(imagePath));
+                avatarImage.Source = bitmap;
+            }
         }
 
         private void UpdateInfo()
@@ -44,7 +56,6 @@ namespace Bank
                 label_phone.Content = reader[3].ToString();
             }
             reader.Close();
-
         }
 
         private void ClearFields()
@@ -65,17 +76,6 @@ namespace Bank
             UpdateInfo();
         }
 
-        private void button_changeAvatar_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string imagePath = openFileDialog.FileName;
-                BitmapImage bitmap = new BitmapImage(new Uri(imagePath));
-                avatarImage.Source = bitmap;
-            }
-        }
         private void button_changePhone_Click(object sender, RoutedEventArgs e)
         {
             ChangePhone changePhone = new ChangePhone(_clientId);

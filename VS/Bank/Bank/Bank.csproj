@@ -101,6 +101,9 @@
     <Compile Include="Sign_up.xaml.cs">
       <DependentUpon>Sign_up.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TransactionList.xaml.cs">
+      <DependentUpon>TransactionList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Validation.xaml.cs">
       <DependentUpon>Validation.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sign_up.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TransactionList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,6 +235,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Photo\noAvatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Photo\list.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -71,8 +71,6 @@ namespace Bank
             cardsComboBox.SelectedIndex = 0;
         }
 
-
-
         private void cardsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cardsComboBox.SelectedIndex > 0)
@@ -81,7 +79,6 @@ namespace Bank
                 SelectBankCard(selectedCardNumber);
             }
         }
-
 
         private void SelectBankCard(string selectedCardNumber)
         {
@@ -161,6 +158,12 @@ namespace Bank
         {
             Profil profil = new Profil(clientId);
             profil.Show();
+        }
+
+        private void transactionList_click(object sender, MouseButtonEventArgs e)
+        {
+            TransactionList transactionList = new TransactionList(clientId);
+            transactionList.Show();
         }
 
         private void updateImage_click(object sender, RoutedEventArgs e)
