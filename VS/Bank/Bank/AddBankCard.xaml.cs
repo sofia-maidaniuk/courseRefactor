@@ -125,7 +125,7 @@ namespace Bank
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
+            Close();
         }
     }
 }

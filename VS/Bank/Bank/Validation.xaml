@@ -19,13 +19,13 @@
             </Grid.RowDefinitions>
 
             <Label x:Name="label_password" Grid.Column="0" Content="Пароль " FontFamily="Tenor Sans" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Right" Height="53"/>
-            <TextBox x:Name="textBox_password" Grid.Column="1" TextWrapping="Wrap"  FontFamily="Tenor Sans" FontSize="40" Height="50" Background="#ADADC8" Width="290" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox x:Name="textBox_password" Grid.Column="1" TextWrapping="Wrap"  FontFamily="Tenor Sans" FontSize="40" Height="50" Background="#ADADC8" Width="290" VerticalAlignment="Center" HorizontalAlignment="Center" TabIndex="1"/>
             <Label x:Name="label2_password" Grid.Row="1" Content="Повторіть пароль " FontFamily="Tenor Sans" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Right" Height="53"/>
-            <TextBox x:Name="textBox2_password" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" FontFamily="Tenor Sans" FontSize="40" Height="50" Background="#ADADC8" Width="290" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="textBox2_password" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" FontFamily="Tenor Sans" FontSize="40" Height="50" Background="#ADADC8" Width="290" HorizontalAlignment="Center" VerticalAlignment="Center" TabIndex="2"/>
         </Grid>
 
         <Button x:Name="button_validation" Content="Підтвердити" FontFamily="Tenor Sans" Background="#03045E"
-        FontSize="30" Height="50" Width="300"  HorizontalAlignment="Center" Cursor="Hand" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,20" Click="Validation_Click">
+        FontSize="30" Height="50" Width="300"  HorizontalAlignment="Center" Cursor="Hand" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,20" Click="Validation_Click" IsDefault="True">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="30">

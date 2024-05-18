@@ -54,7 +54,7 @@
         </Grid>
 
         <Button x:Name="button_Log_in" Content="Увійти" FontFamily="Tenor Sans" FontSize="48" Height="73" Width="292" Background="White" HorizontalAlignment="Right" 
-        VerticalAlignment="Bottom" Click="button_Log_in_Click" Cursor="Hand" Margin="0,0,254,110">
+        VerticalAlignment="Bottom" Click="button_Log_in_Click" Cursor="Hand" Margin="0,0,254,110" IsDefault="True">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="40">

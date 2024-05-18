@@ -22,7 +22,7 @@
         </Grid>
 
         <Grid Grid.Row="3" Background="#FF03045E" Margin="0,0,0,0">
-            <TextBlock x:Name="exit_label" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontFamily="Tenor Sans" MouseLeftButtonDown="Exit_Click" Cursor="Hand" Margin="0,0,0,0">
+            <TextBlock x:Name="exit_label" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontFamily="Tenor Sans" MouseLeftButtonDown="Exit_Click" Cursor="Hand" Margin="0,20,0,0">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Photo/exit.png" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/> 
                     <TextBlock Text="Вихід" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -58,7 +58,7 @@
             <TextBox x:Name="textBox_sum" FontFamily="Tenor Sans" FontSize="40" Background="Transparent" BorderBrush="Transparent" Width="250" Height="70" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="210,0,0,0"/>
 
             <Button x:Name="button_send_to" Content="Переказати" FontFamily="Tenor Sans" Background="#03045E"
-            FontSize="36" Height="100" Width="350"  HorizontalAlignment="Right" Cursor="Hand" Click="button_send_to_Click" VerticalAlignment="Center" Foreground="White" Margin="0,0,70,0">
+            FontSize="36" Height="100" Width="350"  HorizontalAlignment="Right" Cursor="Hand" Click="button_send_to_Click" VerticalAlignment="Center" Foreground="White" Margin="0,0,70,0" IsDefault="True">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="50">

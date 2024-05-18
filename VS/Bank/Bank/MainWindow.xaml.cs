@@ -157,6 +157,11 @@ namespace Bank
             sendToWindow.Show();
         }
 
+        private void profilImage_click(object sender, MouseButtonEventArgs e)
+        {
+            Profil profil = new Profil(clientId);
+            profil.Show();
+        }
 
         private void updateImage_click(object sender, RoutedEventArgs e)
         {

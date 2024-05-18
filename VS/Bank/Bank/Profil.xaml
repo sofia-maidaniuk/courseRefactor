@@ -1,0 +1,103 @@
+﻿<Window x:Class="Bank.Profil"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Profil" Height="800" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FF03045E" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Photo/3.png" Width="80" Height="80" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,5,10,0"/>
+                <TextBlock Text="LABANK" Foreground="White" FontFamily="Tenor Sans" FontSize="36" Height="45" VerticalAlignment="Center" />
+                <Image x:Name="updateImage" Source="Photo/update.png" Width="70" Height="70" Margin="580,0,0,0" MouseLeftButtonDown="updateImage_click" Cursor="Hand"/>
+                <Image Source="Photo/exit.png" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0,10,0" MouseLeftButtonDown="Exit_Click" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Width="1000">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Image x:Name="no_avatar" Width="250" Height="250" Source="Photo/noAvatar.png" VerticalAlignment="Top"  Margin="0,20,0,0"/>
+                <Image x:Name="avatarImage" Width="250" Height="250" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                <Button x:Name="button_changeAvatar" Content="Змінити аватар" Cursor="Hand" FontFamily="Tenor Sans" FontSize="24" Background="#03045E" Foreground="White" Width="250" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Click="button_changeAvatar_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#03045E" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="20">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1"/>
+                                </Border.Effect>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="button_changePhone" Content="Змінити телефон" Cursor="Hand" FontFamily="Tenor Sans" FontSize="24" Background="#03045E" Foreground="White" Width="250" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,0,0" Click="button_changePhone_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#03045E" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="20">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1"/>
+                                </Border.Effect>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="button_changePassword" Content="Змінити пароль" Cursor="Hand" FontFamily="Tenor Sans" FontSize="24" Background="#03045E" Foreground="White" Width="250" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,200,0,0" Click="button_changePassword_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#03045E" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="20">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1"/>
+                                </Border.Effect>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="button_changePIB" Content="Змінити ПІБ" Cursor="Hand" FontFamily="Tenor Sans" FontSize="24" Background="#03045E" Foreground="White" Width="250" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,200,0,0" Click="button_changePIB_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#03045E" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="20">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1"/>
+                                </Border.Effect>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+            <StackPanel Orientation="Vertical" Grid.Column="1" Background="#DDDDF0">
+                <Label x:Name="label_privatInfo" Content="Особисті дані" FontFamily="Tenor Sans" FontSize="34" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+
+                <Label x:Name="label_PIB" Content="ПІБ" FontFamily="Tenor Sans" FontSize="16" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label x:Name="label_firstname" FontFamily="Tenor Sans" FontSize="24" Foreground="Black" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0">
+                    <Label x:Name="label_name" FontFamily="Tenor Sans" FontSize="24" Foreground="Black" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0"/>
+                    <Label x:Name="label_surname" FontFamily="Tenor Sans" FontSize="24" Foreground="Black" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0"/>
+                </StackPanel>
+
+
+                <Label x:Name="label_phoneNumber" Content="Номер телефону" FontFamily="Tenor Sans" FontSize="16" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                <Label x:Name="label_phone"  FontFamily="Tenor Sans" FontSize="24" Foreground="Black" Background="Transparent" BorderBrush="Transparent" Width="400" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0"/>
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Window>

@@ -21,6 +21,10 @@ namespace Bank
     public partial class Sign_up : Window
     {
         DataBase dataBase = new DataBase();
+        protected string Password
+        {
+            get { return textBox_password.Text; }
+        }
         public Sign_up()
         {
             InitializeComponent();
@@ -34,7 +38,7 @@ namespace Bank
             var passportNumber = textBox_passportNumber.Text;
             var phoneNumber = textBox_phoneNumber.Text;
             var idKod = textBox_idKod.Text;
-            var password = textBox_password.Text;
+            var password = Password;
 
             DateTime? selectedDate = datePicker_birthDate.SelectedDate;
 
@@ -70,9 +74,16 @@ namespace Bank
                 return;
             }
 
-            if (!Regex.IsMatch(password, @"^(?=.*[a-zA-Z])(?=.*\d).{4,}$"))
+            if (!Regex.IsMatch(password, @"^(?=.*[a-zA-Z])(?=.*\d).{8,}$"))
             {
-                MessageBox.Show("Пароль повинен містити мінімум 1 латинську літеру і 1 цифру і бути довжиною щонайменше 4 символи.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Пароль повинен містити мінімум 1 латинську літеру і 1 цифру і бути довжиною щонайменше 8 символи.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!Regex.IsMatch(phoneNumber, @"^\+[3]8[0]\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{2}\s?[0-9]{2}$"))
+            {
+                MessageBox.Show("Номер телефону повинен бути у форматі +380XXXXXXXXX", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Error);
+                textBox_phoneNumber.Focus();
                 return;
             }
 

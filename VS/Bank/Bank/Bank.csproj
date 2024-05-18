@@ -77,7 +77,19 @@
     <Compile Include="AddBankCard.xaml.cs">
       <DependentUpon>AddBankCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePhone.xaml.cs">
+      <DependentUpon>ChangePhone.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePIB.xaml.cs">
+      <DependentUpon>ChangePIB.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataClasses\DataStorage.cs" />
+    <Compile Include="Profil.xaml.cs">
+      <DependentUpon>Profil.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -93,6 +105,18 @@
       <DependentUpon>Validation.xaml</DependentUpon>
     </Compile>
     <Page Include="AddBankCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangePhone.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangePIB.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,6 +140,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Profil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Send_to.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,6 +225,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Photo\carsd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Photo\noAvatar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
