@@ -1,20 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Bank.DataClasses;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace Bank
 {
@@ -22,6 +14,7 @@ namespace Bank
     {
         DataBase DataBase = new DataBase();
         private readonly int _clientId;
+        private byte[] selectedImageData;
 
         public Profil(int clientId)
         {
@@ -37,25 +30,73 @@ namespace Bank
             if (openFileDialog.ShowDialog() == true)
             {
                 string imagePath = openFileDialog.FileName;
-                BitmapImage bitmap = new BitmapImage(new Uri(imagePath));
-                avatarImage.Source = bitmap;
+                selectedImageData = File.ReadAllBytes(imagePath);
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(imagePath);
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+
+                ImageBrush imageBrush = new ImageBrush();
+                imageBrush.ImageSource = bitmap;
+                avatarImageBrush.ImageSource = bitmap;
+
+                SaveImageToDatabase();
+            }
+        }
+
+        private void SaveImageToDatabase()
+        {
+            var query = "UPDATE Klient SET photoData = @photoData WHERE ID_Klient = @clientId";
+            SqlCommand command = new SqlCommand(query, DataBase.getSqlConnection());
+            command.Parameters.AddWithValue("@photoData", selectedImageData);
+            command.Parameters.AddWithValue("@clientId", _clientId);
+
+            try
+            {
+                DataBase.openConnection();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при збереженні зображення: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                DataBase.closeConnection();
             }
         }
 
         private void UpdateInfo()
         {
-            var querystring = $"select last_Name, first_Name, surname, phone_Number from Klient where ID_Klient = {_clientId}";
+            var querystring = $"SELECT last_Name, first_Name, surname, phone_Number, photoData FROM Klient WHERE ID_Klient = {_clientId}";
             SqlCommand command = new SqlCommand(querystring, DataBase.getSqlConnection());
             DataBase.openConnection();
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                label_firstname.Content = reader[0].ToString();
-                label_name.Content = reader[1].ToString();
-                label_surname.Content = reader[2].ToString();
-                label_phone.Content = reader[3].ToString();
+                label_firstname.Content = reader["first_Name"].ToString();
+                label_name.Content = reader["last_Name"].ToString();
+                label_surname.Content = reader["surname"].ToString();
+                label_phone.Content = reader["phone_Number"].ToString();
+
+                if (reader["photoData"] != DBNull.Value)
+                {
+                    byte[] imageBytes = (byte[])reader["photoData"];
+                    BitmapImage bitmap = new BitmapImage();
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = ms;
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+                    }
+                    avatarImageBrush.ImageSource = bitmap;
+                }
             }
             reader.Close();
+            DataBase.closeConnection();
         }
 
         private void ClearFields()
@@ -63,7 +104,6 @@ namespace Bank
             label_name.Content = string.Empty;
             label_phone.Content = string.Empty;
         }
-
 
         private void Profil_Loaded(object sender, RoutedEventArgs e)
         {
@@ -96,7 +136,7 @@ namespace Bank
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)
         {
-            Close();        
+            Close();
         }
     }
 }

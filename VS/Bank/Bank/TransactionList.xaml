@@ -31,8 +31,8 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <Label x:Name="label_transaction" Content="Транзакції" Foreground="Black" FontFamily="Tenor Sans" FontSize="34" Height="55" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top"/>
-
-            <ListView Margin="0,10,0,0" ItemsSource="{Binding}">
+            <TextBox x:Name="searchTextBox" Width="200" Height="30" VerticalAlignment="Top" Margin="10" TextChanged="searchTextBox_TextChanged"/>
+            <ListView x:Name="dataGrid" Margin="0,10,0,0" ItemsSource="{Binding}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Тип транзакції" DisplayMemberBinding="{Binding TransactionType}" Width="100"/>
@@ -54,7 +54,5 @@
                 </ListView.GroupStyle>
             </ListView>
         </StackPanel>
-
-
     </Grid>
 </Window>
