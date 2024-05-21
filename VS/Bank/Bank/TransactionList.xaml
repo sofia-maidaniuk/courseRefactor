@@ -31,27 +31,17 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <Label x:Name="label_transaction" Content="Транзакції" Foreground="Black" FontFamily="Tenor Sans" FontSize="34" Height="55" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="searchTextBox" Width="200" Height="30" VerticalAlignment="Top" Margin="10" TextChanged="searchTextBox_TextChanged"/>
+            <TextBox x:Name="searchTextBox" Width="200" Height="40" VerticalAlignment="Top" Margin="10" FontSize="24"  TextChanged="searchTextBox_TextChanged" VerticalContentAlignment="Center"/>
             <ListView x:Name="dataGrid" Margin="0,10,0,0" ItemsSource="{Binding}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Тип транзакції" DisplayMemberBinding="{Binding TransactionType}" Width="100"/>
-                        <GridViewColumn Header="Призначення" DisplayMemberBinding="{Binding TransactionDestination}" Width="100"/>
-                        <GridViewColumn Header="Дата транзакції" DisplayMemberBinding="{Binding TransactionDate}" Width="100"/>
-                        <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding TransactionNumber}" Width="100"/>
-                        <GridViewColumn Header="Сума" DisplayMemberBinding="{Binding TransactionValue}" Width="100"/>
+                        <GridViewColumn Header="Тип транзакції" DisplayMemberBinding="{Binding transactionType}" Width="150"/>
+                        <GridViewColumn Header="Призначення" DisplayMemberBinding="{Binding transactionDestination}" Width="300"/>
+                        <GridViewColumn Header="Дата транзакції" DisplayMemberBinding="{Binding transactionDate}" Width="150"/>
+                        <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding transactionNumber}" Width="100"/>
+                        <GridViewColumn Header="Сума" DisplayMemberBinding="{Binding transactionValue}" Width="100"/>
                     </GridView>
                 </ListView.View>
-
-                <ListView.GroupStyle>
-                    <GroupStyle>
-                        <GroupStyle.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding TransactionType}" FontSize="20" FontWeight="Bold" Foreground="Black"/>
-                            </DataTemplate>
-                        </GroupStyle.HeaderTemplate>
-                    </GroupStyle>
-                </ListView.GroupStyle>
             </ListView>
         </StackPanel>
     </Grid>

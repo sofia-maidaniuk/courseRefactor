@@ -9,7 +9,8 @@ create table Klient
 	id_kod char(10) check (id_kod like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	birthday date not null,
 	password_user varchar(50) not null,
-    registration_Date date
+    registration_Date date,
+	photoData VARBINARY(MAX)
 );
 
 create table BankingCard (
@@ -36,4 +37,8 @@ create table Transactions(
   transactionValue DECIMAL(18, 2)
 );
 
-update BankingCard set balance = 50000 where ID_Card=3
+update BankingCard set balance = 50000 where ID_Card=1
+
+alter table Transactions add ID_Card int
+alter table Transactions add foreign key (ID_Card) references dbo.BankingCard(ID_Card) on delete no action on update cascade
+

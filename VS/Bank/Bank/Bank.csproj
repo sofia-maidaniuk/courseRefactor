@@ -86,6 +86,8 @@
     <Compile Include="ChangePIB.xaml.cs">
       <DependentUpon>ChangePIB.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Transaction.cs" />
+    <Compile Include="Classes\TransferTransaction.cs" />
     <Compile Include="DataClasses\DataStorage.cs" />
     <Compile Include="Profil.xaml.cs">
       <DependentUpon>Profil.xaml</DependentUpon>

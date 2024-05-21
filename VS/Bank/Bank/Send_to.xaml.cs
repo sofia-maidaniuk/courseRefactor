@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Bank.DataClasses;
+using Bank.Classes;
 
 namespace Bank
 {
@@ -50,6 +51,7 @@ namespace Bank
         {
             double dolar = 39.4;
             double euro = 42.3;
+            double commissionRate = 0.01; 
 
             var cardNumber = textBox_cardNumber.Text.ToString();
             var cvvCode = textBox_cvvCode.Text.ToString();
@@ -67,8 +69,9 @@ namespace Bank
             bool error = false;
 
             string queryCheckCard = $"select cvvCode, CONCAT(FORMAT(cardDate, '%M'),'/', FORMAT(cardDate, '%y')), " +
-                $"balance, currency from BankingCard where cardNumber = '{cardNumber}'";
+                $"balance, currency from BankingCard where cardNumber = @cardNumber";
             SqlCommand commandCheckCard = new SqlCommand(queryCheckCard, dataBase.getSqlConnection());
+            commandCheckCard.Parameters.AddWithValue("@cardNumber", cardNumber);
             dataBase.openConnection();
             SqlDataReader reader = commandCheckCard.ExecuteReader();
 
@@ -93,8 +96,9 @@ namespace Bank
                 error = true;
             }
 
-            var queryCheckCard_to = $"select ID_Card, currency from BankingCard where cardNumber = '{cardNumber_to}'";
+            var queryCheckCard_to = $"select ID_Card, currency from BankingCard where cardNumber = @cardNumber_to";
             SqlCommand commandCheckCard_to = new SqlCommand(queryCheckCard_to, dataBase.getSqlConnection());
+            commandCheckCard_to.Parameters.AddWithValue("@cardNumber_to", cardNumber_to);
 
             adapter.SelectCommand = commandCheckCard_to;
             adapter.Fill(table);
@@ -106,19 +110,19 @@ namespace Bank
             }
             reader1.Close();
 
-            if(table.Rows.Count == 0)
+            if (table.Rows.Count == 0)
             {
                 MessageBox.Show("Картка одержувача не знайдена.", "Відміна", MessageBoxButton.OK, MessageBoxImage.Information);
                 error = true;
             }
 
-            if(Convert.ToDouble(sum) < 1.00)
+            if (Convert.ToDouble(sum) < 1.00)
             {
                 MessageBox.Show("Мінімальна сума переказу 1.00 UAH", "Відміна", MessageBoxButton.OK, MessageBoxImage.Information);
                 error = true;
             }
 
-            if(cardNumber == cardNumber_to)
+            if (cardNumber == cardNumber_to)
             {
                 MessageBox.Show("Ви не можете переказати кошти на ту ж саму карту.", "Відміна", MessageBoxButton.OK, MessageBoxImage.Information);
                 error = true;
@@ -136,65 +140,94 @@ namespace Bank
                 Validation validation = new Validation();
                 validation.ShowDialog();
 
-                if(DataStorage.attempts > 0)
+                if (DataStorage.attempts > 0)
                 {
                     DateTime transactionDate = DateTime.Now;
                     var transactionNumber = "P";
-                    for(int i = 0; i < 10; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         transactionNumber += Convert.ToString(random.Next(0, 10));
                     }
-                    var queryTransiction1 = $"";
-                    var queryTransiction2 = $"";
 
-                    if(currency == "UAH" && currency_to == "USD")
+                    double convertedSum = sum;
+                    if (currency == "UAH" && currency_to == "USD")
                     {
-                        queryTransiction1 = $"update BankingCard set balance = balance - {sum} where cardNumber = '{cardNumber}'";
-                        queryTransiction2 = $"update BankingCard set balance = balance + {sum /= dolar} where cardNumber = '{cardNumber_to}'";
+                        convertedSum /= dolar;
                     }
-                    else if(currency == "UAH" && currency_to == "EUR"  )
+                    else if (currency == "UAH" && currency_to == "EUR")
                     {
-                        queryTransiction1 = $"update BankingCard set balance = balance - {sum} where cardNumber = '{cardNumber}'";
-                        queryTransiction2 = $"update BankingCard set balance = balance + {sum /= euro} where cardNumber = '{cardNumber_to}'";
+                        convertedSum /= euro;
                     }
-                    else if(currency == "USD" && currency_to == "UAH")
+                    else if (currency == "USD" && currency_to == "UAH")
                     {
-                        queryTransiction1 = $"update BankingCard set balance = balance - {sum} where cardNumber = '{cardNumber}'";
-                        queryTransiction2 = $"update BankingCard set balance = balance + {sum *= dolar} where cardNumber = '{cardNumber_to}'";
+                        convertedSum *= dolar;
                     }
-                    else if(currency == "USD" && currency_to == "EUR")
+                    else if (currency == "USD" && currency_to == "EUR")
                     {
-                        queryTransiction1 = $"update BankingCard set balance = balance - {sum} where cardNumber = '{cardNumber}'";
-                        queryTransiction2 = $"update BankingCard set balance = balance + {sum *= 0.91} where cardNumber = '{cardNumber_to}'";
+                        convertedSum *= 0.91;
                     }
-                    else if(currency == "EUR" && currency_to == "UAH")
+                    else if (currency == "EUR" && currency_to == "UAH")
                     {
-                        queryTransiction1 = $"update BankingCard set balance = balance - {sum} where cardNumber = '{cardNumber}'";
-                        queryTransiction2 = $"update BankingCard set balance = balance + {sum *= euro} where cardNumber = '{cardNumber_to}'";
+                        convertedSum *= euro;
                     }
-                    else if(currency == "EUR" && currency_to == "USD")
+                    else if (currency == "EUR" && currency_to == "USD")
                     {
-                        queryTransiction1 = $"update BankingCard set balance = balance - {sum} where cardNumber = '{cardNumber}'";
-                        queryTransiction2 = $"update BankingCard set balance = balance + {sum*=1.06} where cardNumber = '{cardNumber_to}'";
-                    }
-                    else
-                    {
-                        queryTransiction1 = $"update BankingCard set balance = balance - {sum} where cardNumber = '{cardNumber}'";
-                        queryTransiction2 = $"update BankingCard set balance = balance + {sum} where cardNumber = '{cardNumber_to}'";
+                        convertedSum *= 1.06;
                     }
 
-                   var command1 = new SqlCommand(queryTransiction1, dataBase.getSqlConnection());
-                    var command2 = new SqlCommand(queryTransiction2, dataBase.getSqlConnection());
+                    var transaction = new TransferTransaction(commissionRate)
+                    {
+                        TransactionValue = sum,
+                        TransactionType = "Переказ",
+                        TransactionDestination = cardNumber_to,
+                        TransactionDate = transactionDate,
+                        TransactionNumber = transactionNumber
+                    };
+                    double totalAmount = transaction.CalculateTotalAmount();
+
+                    var queryTransaction1 = $"update BankingCard set balance = balance - @totalAmount where cardNumber = @cardNumber";
+                    var queryTransaction2 = $"update BankingCard set balance = balance + @convertedSum where cardNumber = @cardNumber_to";
+                    var queryTransactionSender = $"INSERT INTO Transactions (transactionType, transactionDestination, transactionDate, transactionNumber, transactionValue, ID_Card) " +
+                                                  $"VALUES ('Переказ', @cardNumber_to, @transactionDate, @transactionNumber, @totalAmount, (SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber))";
+                    var queryTransactionReceiver = $"INSERT INTO Transactions (transactionType, transactionDestination, transactionDate, transactionNumber, transactionValue, ID_Card) " +
+                                                   $"VALUES ('Отримання', @cardNumber, @transactionDate, @transactionNumber, @convertedSum, (SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber_to))";
+
+                    SqlCommand command1 = new SqlCommand(queryTransaction1, dataBase.getSqlConnection());
+                    SqlCommand command2 = new SqlCommand(queryTransaction2, dataBase.getSqlConnection());
+                    SqlCommand commandSender = new SqlCommand(queryTransactionSender, dataBase.getSqlConnection());
+                    SqlCommand commandReceiver = new SqlCommand(queryTransactionReceiver, dataBase.getSqlConnection());
+
+                    command1.Parameters.AddWithValue("@totalAmount", totalAmount);
+                    command1.Parameters.AddWithValue("@cardNumber", cardNumber);
+
+                    command2.Parameters.AddWithValue("@convertedSum", convertedSum);
+                    command2.Parameters.AddWithValue("@cardNumber_to", cardNumber_to);
+
+                    commandSender.Parameters.AddWithValue("@cardNumber_to", cardNumber_to);
+                    commandSender.Parameters.AddWithValue("@transactionDate", transactionDate);
+                    commandSender.Parameters.AddWithValue("@transactionNumber", transactionNumber);
+                    commandSender.Parameters.AddWithValue("@totalAmount", totalAmount);
+                    commandSender.Parameters.AddWithValue("@cardNumber", cardNumber);
+
+                    commandReceiver.Parameters.AddWithValue("@cardNumber", cardNumber);
+                    commandReceiver.Parameters.AddWithValue("@transactionDate", transactionDate);
+                    commandReceiver.Parameters.AddWithValue("@transactionNumber", transactionNumber);
+                    commandReceiver.Parameters.AddWithValue("@convertedSum", convertedSum);
+                    commandReceiver.Parameters.AddWithValue("@cardNumber_to", cardNumber_to);
 
                     dataBase.openConnection();
                     command1.ExecuteNonQuery();
                     command2.ExecuteNonQuery();
+                    commandSender.ExecuteNonQuery();
+                    commandReceiver.ExecuteNonQuery();
                     dataBase.closeConnection();
 
                     Close();
                 }
             }
         }
+
+
         private void label_cvvCode_click(object sender, MouseButtonEventArgs e)
         {
             if (textBox_cvvCode.Text.ToString() == "***")
