@@ -89,6 +89,12 @@
     <Compile Include="Classes\Transaction.cs" />
     <Compile Include="Classes\TransferTransaction.cs" />
     <Compile Include="DataClasses\DataStorage.cs" />
+    <Compile Include="Payment.xaml.cs">
+      <DependentUpon>Payment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Phone.xaml.cs">
+      <DependentUpon>Phone.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Profil.xaml.cs">
       <DependentUpon>Profil.xaml</DependentUpon>
     </Compile>
@@ -145,6 +151,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Payment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Phone.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Profil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -240,6 +254,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Photo\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Photo\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Photo\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Photo\credit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

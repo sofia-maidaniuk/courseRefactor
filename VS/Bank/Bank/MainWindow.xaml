@@ -130,6 +130,64 @@
                 <TextBox x:Name="cardNumberTransaction_texBox" FontFamily="Tenor Sans" FontSize="30" Width="360" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                          Margin="40,0,0,60" Background="Transparent" BorderBrush="Transparent" />
             </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                <Border Width="500" Height="150" Background="#E6E6F5" CornerRadius="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="phoneImage" Source="/Photo/phone.png" Height="55" Width="55" VerticalAlignment="Top" Margin="30, 35, 0, 0"/>
+                    <TextBlock x:Name="phone" Text="Поповнення мобільного телефону" FontFamily="Tenor Sans" FontSize="24" Margin="10,40,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Width="300"/>
+                </StackPanel>
+                <Line X1="0" X2="360" Y1="0" Y2="0" Stroke="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="40,0,0,60"/>
+                <Button x:Name="button_payPhone" Content=">" FontFamily="Tenor Sans" FontSize="30" Cursor="Hand" Background="#ADADC8" Foreground="Black" Height="80" Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                Margin="0,0,40,0" Click="button_payPhone_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="30">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <TextBox x:Name="payPhone_texBox" FontFamily="Tenor Sans" FontSize="30" Width="360" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+             Margin="40,0,0,60" Background="Transparent" BorderBrush="Transparent" />
+            </Grid>
+            
+            <Grid Grid.Row="3" Grid.Column="0">
+                <Border Width="500" Height="120" Background="#E6E6F5" CornerRadius="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="homeImage" Source="/Photo/home.png" Height="70" Width="70" VerticalAlignment="Center" Margin="30, 0, 0, 0"/>
+                    <TextBlock x:Name="payment" Text="Платежі" FontFamily="Tenor Sans" FontSize="24" Margin="10,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="300"/>
+                </StackPanel>
+                <Button x:Name="button_payment" Content=">" FontFamily="Tenor Sans" FontSize="30" Cursor="Hand" Background="#ADADC8" Foreground="Black" Height="80" Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                Margin="0,0,40,0" Click="button_payment_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="30">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+                <Border Width="500" Height="120" Background="#E6E6F5" CornerRadius="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="creditImage" Source="/Photo/credit.png" Height="70" Width="70" VerticalAlignment="Center" Margin="30, 0, 0, 0"/>
+                    <TextBlock x:Name="credit" Text="Оформлення кредиту" FontFamily="Tenor Sans" FontSize="24" Margin="10,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="300"/>
+                </StackPanel>
+                <Button x:Name="button_credit" Content=">" FontFamily="Tenor Sans" FontSize="30" Cursor="Hand" Background="#ADADC8" Foreground="Black" Height="80" Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                Margin="0,0,40,0" Click="button_credit_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="30">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
         </Grid>
     </Grid>
 </Window>

@@ -167,6 +167,16 @@ namespace Bank
             transactionList.Show();
         }
 
+        private void button_payPhone_Click(object sender, RoutedEventArgs e)
+        {
+            DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
+            DataStorage.phone_Number = payPhone_texBox.Text;
+
+            Phone phone = new Phone(clientId, DataStorage.bankCard, DataStorage.cardNumber, DataStorage.cvvCode, DataStorage.expiryDate, DataStorage.phone_Number);
+            payPhone_texBox.Text = string.Empty;
+            phone.Show();
+        }
+
         private void updateImage_click(object sender, RoutedEventArgs e)
         {
             MainWindow_Loaded();
@@ -176,6 +186,18 @@ namespace Bank
         private void Exit_Click(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void button_credit_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void button_payment_Click(object sender, RoutedEventArgs e)
+        {
+            DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
+            Payment payment = new Payment(clientId, DataStorage.bankCard, DataStorage.cardNumber, DataStorage.cvvCode, DataStorage.expiryDate);
+            payment.Show();
         }
     }
 }
