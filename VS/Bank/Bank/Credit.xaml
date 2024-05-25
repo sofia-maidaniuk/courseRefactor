@@ -1,0 +1,106 @@
+﻿<Window x:Class="Bank.Credit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Credit" Height="800" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="210"/>
+            <RowDefinition Height="110"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FF03045E" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Photo/3.png" Width="110" Height="110" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,5,10,0"/>
+                <TextBlock Text="LABANK" Foreground="White" FontFamily="Tenor Sans" FontSize="36" Height="45" VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="3" Background="#FF03045E" Margin="0,0,0,0">
+            <TextBlock x:Name="exit_label" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontFamily="Tenor Sans" MouseLeftButtonDown="Exit_Click" Cursor="Hand" Margin="0,20,0,0">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="Photo/exit.png" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/> 
+            <TextBlock Text="Вихід" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>   
+    </TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,0,0,0">
+            <Border x:Name="makeCredit" Width="470" Height="310" CornerRadius="66" Background="#ADADC8" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            <Border x:Name="payCredit" Width="470" Height="310" CornerRadius="66" Background="#ADADC8" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0"/>
+            <StackPanel Orientation="Vertical">
+                <Label x:Name="label_makeCredit" Content="ОФОРМИТИ КРЕДИТ" FontFamily="Tenor Sans" FontSize="24" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,30,0,0"/>
+
+                <Label x:Name="creditSum" Content="Сума" FontFamily="Tenor Sans" FontSize="16" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,10,0,0"/>
+                <TextBox x:Name="textBox_creditSum" FontFamily="Tenor Sans" FontSize="30" Background="Transparent" BorderBrush="Transparent" Width="250" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="50,0,0,0"/>
+
+
+                <Label x:Name="month" Content="Кількість місяців" FontFamily="Tenor Sans" FontSize="16" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,5,0,0"/>
+                <TextBox x:Name="textBox_month" FontFamily="Tenor Sans" FontSize="20" Foreground="Black" Background="Transparent" Height="40" Width="400" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0"/>
+
+                <StackPanel Margin="50,10,12,10" Orientation="Horizontal" Width="400" HorizontalAlignment="Left">
+                    <Label x:Name="monthPay" Content="Щомісячний платіж: " FontSize="20" FontFamily="Tenor Sans" Foreground="Black" Height="30"/>
+                    <Label  x:Name="label_monthPay" Content="{Binding MonthPay}" FontFamily="Tenor Sans" FontSize="20" Foreground="Black" Background="Transparent" Height="30" Width="200" VerticalContentAlignment="Center" RenderTransformOrigin="0.506,0.545"/>
+                </StackPanel>
+
+                <Label x:Name="label_percent" Content="Процентна ставка: 1%" FontSize="12" FontFamily="Tenor Sans" Foreground="Black"  Width="300" Margin="50,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+
+            </StackPanel>
+            <StackPanel x:Name="StackPanelCredit" Orientation="Vertical">
+                <Label x:Name="label_payCredit" Content="ОПЛАТА КРЕДИТУ" FontFamily="Tenor Sans" FontSize="24" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="330,30,0,0"/>
+
+                <StackPanel Orientation="Horizontal" Width="400" HorizontalAlignment="Center"  Margin="500,10,0,0" >
+                    <Label x:Name="date" Content="Дата оформлення" FontFamily="Tenor Sans" FontSize="16" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Label x:Name="label_creditDate" Content="{Binding CreditData}" FontFamily="Tenor Sans" FontSize="24" Foreground="Black" Background="Transparent" Height="40" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+               
+                <Label x:Name="payed"  Content="Сплачено" FontFamily="Tenor Sans" FontSize="16" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="180,10,0,0"/>
+
+                <StackPanel Margin="500,10,12,10" Orientation="Horizontal" Width="420" HorizontalAlignment="Center">
+                    <Label x:Name="label_sum" Content="{Binding Sum}" FontSize="20" FontFamily="Tenor Sans" Foreground="Black" Height="30" Width="200"/>
+                    <Label x:Name="label" Content="/" FontSize="16" FontFamily="Tenor Sans" Foreground="Black" Height="30"/>
+                    <Label  x:Name="label_totalSum" Content="{Binding TotalSum}" FontFamily="Tenor Sans" FontSize="20" Foreground="Black" Background="Transparent" Height="30" Width="200" VerticalContentAlignment="Center" RenderTransformOrigin="0.506,0.545"/>
+                </StackPanel>
+
+                <StackPanel Margin="500,10,12,10" Orientation="Horizontal" Width="400" HorizontalAlignment="Center">
+                    <Label x:Name="nextPayDate" Content="Наступна оплата: " FontSize="16" FontFamily="Tenor Sans" Foreground="Black" Height="30"/>
+                    <Label  x:Name="label_nextPayDate" Content="{Binding NextPayDate}" FontFamily="Tenor Sans" FontSize="20" Foreground="Black" Background="Transparent" Height="30" Width="200" VerticalContentAlignment="Center" RenderTransformOrigin="0.506,0.545"/>
+                </StackPanel>
+
+                <StackPanel Margin="500,10,12,10" Orientation="Horizontal" Width="400" HorizontalAlignment="Center">
+                    <Label x:Name="nowPaye" Content="До сплати: " FontSize="16" FontFamily="Tenor Sans" Foreground="Black" Height="30"/>
+                    <Label  x:Name="label_toPaySum" Content="{Binding ToPaySum}" FontFamily="Tenor Sans" FontSize="20" Foreground="Black" Background="Transparent" Height="30" Width="200" VerticalContentAlignment="Center" RenderTransformOrigin="0.506,0.545"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0,0,0,0">
+            <Button x:Name="button_take" Content="Оформити" FontFamily="Tenor Sans" Background="#03045E"
+            FontSize="36" Height="100" Width="350"  HorizontalAlignment="Left" Cursor="Hand" Click="button_take_Click" VerticalAlignment="Center" Foreground="White" Margin="70,0,0,0" IsDefault="True">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button x:Name="button_pay" Content="Сплатити" FontFamily="Tenor Sans" Background="#03045E"
+            FontSize="36" Height="100" Width="350"  HorizontalAlignment="Right" Cursor="Hand" Click="button_payment_Click" VerticalAlignment="Center" Foreground="White" Margin="0,0,70,0" IsDefault="True">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

@@ -57,9 +57,9 @@ namespace Bank
                 return;
             }
 
-            if (phoneNumber.Length > 50 || password.Length > 50)
+            if (phoneNumber.Length > 14 || password.Length > 50)
             {
-                MessageBox.Show("Довжина логіну або пароля перевищує 50 символів!", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Довжина логіну або пароля перевищує допустиму кількість символів!", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -67,10 +67,10 @@ namespace Bank
             DateTime currentDate = DateTime.Now;
             string formattedCurrentDate = currentDate.ToString("yyyy-MM-dd");
 
-            DateTime minDateOfBirth = currentDate.AddYears(-14);
+            DateTime minDateOfBirth = currentDate.AddYears(-18);
             if (selectedDate > minDateOfBirth)
             {
-                MessageBox.Show("Ви повинні бути старше 14 років для реєстрації.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ви повинні бути старше 18 років для реєстрації.", "Помилка вводу", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

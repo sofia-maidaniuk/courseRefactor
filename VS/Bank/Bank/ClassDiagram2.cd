@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Bank.AddBankCard" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAABAAAACAAABQAAAAAACAAQAAACAAAA=</HashCode>
+      <FileName>AddBankCard.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.ChangePassword" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAEAAAAAAAAAAAAQAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>ChangePassword.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.ChangePhone" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAABAAAAAQAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>ChangePhone.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.ChangePIB" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAQAAAAAACCAAAAAAAAAA=</HashCode>
+      <FileName>ChangePIB.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.Credit" BaseTypeListCollapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAgAAACEIABAAAACAAAwQAAAAAECAAQIAAAAgQA=</HashCode>
+      <FileName>Credit.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.DataBase">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAREAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataClasses\DataBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bank.Log_in" BaseTypeListCollapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAACAAAAEAAAAAAAAAAAAAAAAAAAAQAAAEAAAAAA=</HashCode>
+      <FileName>Log_in.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAFAAAgMAAAAAIAACAIAQAAAAAEAgABAgACACAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.Payment" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAEAAAAAAAEAABAAAACEAAAQAAAYAECIAQAAAAgCAA=</HashCode>
+      <FileName>Payment.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.Phone" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAAEAAAAAAAEAABAAAACQAAAQAAAAAACIAQABAAACAA=</HashCode>
+      <FileName>Phone.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Bank.Profil" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAkAAACAABACACAAAQAAAAAACAIABAAAACAA=</HashCode>
+      <FileName>Profil.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.Send_to" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABEAAAAAAAEAABAAIACAAAAQAAAAAACIAQBAAAACAA=</HashCode>
+      <FileName>Send_to.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.Sign_up" BaseTypeListCollapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQEAAAAAAAAAAAAAACAAAAKAAAAAAAAAAA=</HashCode>
+      <FileName>Sign_up.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.TransactionList" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAIAABAAAAAAQQAAAAAACAAAAAgAAAAA=</HashCode>
+      <FileName>TransactionList.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.Validation" BaseTypeListCollapsed="true">
+    <Position X="4" Y="6.25" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="Bank.Validation.ValidationCompletedEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Validation.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAEAAAAAAAAAAAQBAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Validation.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bank.Classes.Transaction">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAAAAAAAAAAAAAAAAACAAAAEBAAAAEAABAAA=</HashCode>
+      <FileName>Classes\Transaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bank.Classes.TransferTransaction">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TransferTransaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bank.DataClasses.DataStorage">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAIACAAAAAAAAAAAAAAAAAAAAAAABQEAAAAAAAAAgA=</HashCode>
+      <FileName>DataClasses\DataStorage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

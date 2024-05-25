@@ -36,10 +36,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label x:Name="label_transaction" Content="Транзакції" Foreground="Black" FontFamily="Tenor Sans" FontSize="34" Height="45" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="searchTextBox" Width="200" Height="40" VerticalAlignment="Top" Margin="10" FontSize="24" TextChanged="searchTextBox_TextChanged" VerticalContentAlignment="Center" Grid.Row="1"/>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="2">
-                <ListView x:Name="dataGrid" ItemsSource="{Binding}" Height="800">
+            <StackPanel Orientation="Vertical">
+                <Label x:Name="label_transaction" Content="Транзакції" Foreground="Black" FontFamily="Tenor Sans" FontSize="34" Height="45" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="searchTextBox" Width="200" Height="40" VerticalAlignment="Top" Margin="10" FontSize="24" TextChanged="searchTextBox_TextChanged" VerticalContentAlignment="Center" Grid.Row="1"/>
+
+                <ListView x:Name="dataGrid" ItemsSource="{Binding}" Height="400">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Тип транзакції" DisplayMemberBinding="{Binding transactionType}" Width="150"/>
@@ -50,7 +51,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </ScrollViewer>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

@@ -84,6 +84,12 @@ namespace Bank
 
         private void button_payment_Click(object sender, RoutedEventArgs e)
         {
+            if (servicesComboBox.SelectedIndex == 0 || string.IsNullOrEmpty(selectedServiceName))
+            {
+                MessageBox.Show("Будь ласка, виберіть послугу.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var cardNumber = textBox_cardNumber.Text;
             var cvvCode = textBox_cvvCode.Text;
             var cardDate = textBox_date.Text;
@@ -171,8 +177,8 @@ namespace Bank
                     double commissionRate = 0.01;
                     TransferTransaction transaction = new TransferTransaction(commissionRate)
                     {
-                        TransactionType = selectedServiceName,  // Використання значення з ComboBox як тип транзакції
-                        TransactionDestination = textBox_bill.Text, // Використання номера рахунку як призначення транзакції
+                        TransactionType = selectedServiceName,  
+                        TransactionDestination = textBox_bill.Text, 
                         TransactionDate = transactionDate,
                         TransactionNumber = transactionNumber,
                         TransactionValue = sum
@@ -192,14 +198,15 @@ namespace Bank
                         return;
                     }
 
-                    var queryPhone1 = "update BankingCard set balance = balance - @totalAmount where cardNumber = @cardNumber";
+                    var queryPayment = "update BankingCard set balance = balance - @totalAmount where cardNumber = @cardNumber";
                     var queryTransaction = "INSERT INTO Transactions (transactionType, transactionDestination, transactionDate, transactionNumber, transactionValue, ID_Card) " +
                         "VALUES (@transactionType, @transactionDestination, @transactionDate, @transactionNumber, @totalAmount, " +
                         "(SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber))";
+                    var queryService = "update Services set serviceBalance = serviceBalance + @sum where serviceName = @selectedServiceName";
 
-                    var commandPhone1 = new SqlCommand(queryPhone1, dataBase.getSqlConnection());
-                    commandPhone1.Parameters.AddWithValue("@totalAmount", totalAmount);
-                    commandPhone1.Parameters.AddWithValue("@cardNumber", cardNumber);
+                    var commandPayment1 = new SqlCommand(queryPayment, dataBase.getSqlConnection());
+                    commandPayment1.Parameters.AddWithValue("@totalAmount", totalAmount);
+                    commandPayment1.Parameters.AddWithValue("@cardNumber", cardNumber);
 
                     var commandTransaction = new SqlCommand(queryTransaction, dataBase.getSqlConnection());
                     commandTransaction.Parameters.AddWithValue("@transactionType", transaction.TransactionType);
@@ -209,18 +216,24 @@ namespace Bank
                     commandTransaction.Parameters.AddWithValue("@totalAmount", totalAmount);
                     commandTransaction.Parameters.AddWithValue("@cardNumber", cardNumber);
 
+                    var commandService = new SqlCommand(queryService, dataBase.getSqlConnection());
+                    commandService.Parameters.AddWithValue("@sum", sum);
+                    commandService.Parameters.AddWithValue("@selectedServiceName", selectedServiceName);
+
                     dataBase.openConnection();
 
                     SqlTransaction dbTransaction = dataBase.getSqlConnection().BeginTransaction();
-                    commandPhone1.Transaction = dbTransaction;
+                    commandPayment1.Transaction = dbTransaction;
                     commandTransaction.Transaction = dbTransaction;
+                    commandService.Transaction = dbTransaction;
 
                     try
                     {
-                        int rowsAffected1 = commandPhone1.ExecuteNonQuery();
+                        int rowsAffected1 = commandPayment1.ExecuteNonQuery();
                         int rowsAffected2 = commandTransaction.ExecuteNonQuery();
+                        int rowsAffected3 = commandService.ExecuteNonQuery();
 
-                        if (rowsAffected1 > 0 && rowsAffected2 > 0)
+                        if (rowsAffected1 > 0 && rowsAffected2 > 0 && rowsAffected3 > 0)
                         {
                             dbTransaction.Commit();
                             MessageBox.Show("Транзакція успішно завершена.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);

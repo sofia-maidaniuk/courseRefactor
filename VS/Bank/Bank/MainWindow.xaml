@@ -105,9 +105,7 @@
                     </Button.Template>
                 </Button>
 
-                <ComboBox x:Name="cardsComboBox" Width="450" Height="40" FontSize="24" FontFamily="Tenor Sans" Background="#ADADC8" BorderBrush="#ADADC8" BorderThickness="1" Margin="10, 20,0,0" SelectedValuePath="cardNumber" SelectionChanged="cardsComboBox_SelectionChanged">
-                    <ComboBoxItem Content="Виберіть карту"/>
-                </ComboBox>
+                <ComboBox x:Name="cardsComboBox" Width="450" Height="40" FontSize="24" FontFamily="Tenor Sans" Background="#ADADC8" BorderBrush="#ADADC8" BorderThickness="1" Margin="10, 20,0,0" SelectedValuePath="cardNumber" SelectionChanged="cardsComboBox_SelectionChanged"/>
             </StackPanel>
 
             <Grid Grid.Row="2" Grid.Column="0">

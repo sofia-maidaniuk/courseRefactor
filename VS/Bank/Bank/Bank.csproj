@@ -88,6 +88,9 @@
     </Compile>
     <Compile Include="Classes\Transaction.cs" />
     <Compile Include="Classes\TransferTransaction.cs" />
+    <Compile Include="Credit.xaml.cs">
+      <DependentUpon>Credit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataClasses\DataStorage.cs" />
     <Compile Include="Payment.xaml.cs">
       <DependentUpon>Payment.xaml</DependentUpon>
@@ -128,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChangePIB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Credit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,6 +202,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Fonts\TenorSans-Regular.ttf" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

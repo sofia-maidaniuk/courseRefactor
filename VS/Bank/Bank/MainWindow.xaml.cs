@@ -30,7 +30,6 @@ namespace Bank
             addBankCard.Show();
         }
 
-
         private void MainWindow_Loaded()
         {
             noCard.Visibility = Visibility.Visible;
@@ -136,8 +135,8 @@ namespace Bank
                 masterCardImage.Visibility = Visibility.Visible;
                 noCard.Visibility = Visibility.Hidden;
             }
-
         }
+
         private void label_cvvCode_click(object sender, MouseButtonEventArgs e)
         {
             if (label_cvvCode.Content.ToString() == "***")
@@ -145,14 +144,20 @@ namespace Bank
             else
                 label_cvvCode.Content = "***";
         }
+
         private void button_transfer_Click(object sender, RoutedEventArgs e)
         {
-            DataStorage.bankCard = cardNumberTransaction_texBox.Text;
-            DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
-            cardsComboBox.Text = "";
+            if (cardsComboBox.SelectedItem != null)
+            {
+                DataStorage.bankCard = cardNumberTransaction_texBox.Text;
+                DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
+                cardsComboBox.Text = "";
 
-            Send_to sendToWindow = new Send_to(clientId, DataStorage.bankCard, DataStorage.cardNumber, DataStorage.cvvCode, DataStorage.expiryDate);
-            sendToWindow.Show();
+                Send_to sendToWindow = new Send_to(clientId, DataStorage.bankCard, DataStorage.cardNumber, DataStorage.cvvCode, DataStorage.expiryDate);
+                sendToWindow.Show();
+            }
+            else
+                MessageBox.Show("Будь ласка, виберіть карту перед тим, як продовжити.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void profilImage_click(object sender, MouseButtonEventArgs e)
@@ -169,12 +174,17 @@ namespace Bank
 
         private void button_payPhone_Click(object sender, RoutedEventArgs e)
         {
-            DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
-            DataStorage.phone_Number = payPhone_texBox.Text;
+            if (cardsComboBox.SelectedItem != null && cardsComboBox.SelectedItem != "Виберіть карту")
+            {
+                DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
+                DataStorage.phone_Number = payPhone_texBox.Text;
 
-            Phone phone = new Phone(clientId, DataStorage.bankCard, DataStorage.cardNumber, DataStorage.cvvCode, DataStorage.expiryDate, DataStorage.phone_Number);
-            payPhone_texBox.Text = string.Empty;
-            phone.Show();
+                Phone phone = new Phone(clientId, DataStorage.bankCard, DataStorage.cardNumber, DataStorage.cvvCode, DataStorage.expiryDate, DataStorage.phone_Number);
+                payPhone_texBox.Text = string.Empty;
+                phone.Show();
+            }
+            else
+                MessageBox.Show("Будь ласка, виберіть карту перед тим, як продовжити.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void updateImage_click(object sender, RoutedEventArgs e)
@@ -190,14 +200,27 @@ namespace Bank
 
         private void button_credit_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (cardsComboBox.SelectedItem != null && cardsComboBox.SelectedItem != "Виберіть карту")
+            {
+                DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
+
+                Credit credit = new Credit(clientId);
+                credit.Show();
+            }
+            else
+                MessageBox.Show("Будь ласка, виберіть карту перед тим, як продовжити.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void button_payment_Click(object sender, RoutedEventArgs e)
         {
-            DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
-            Payment payment = new Payment(clientId, DataStorage.bankCard, DataStorage.cardNumber, DataStorage.cvvCode, DataStorage.expiryDate);
-            payment.Show();
+            if (cardsComboBox.SelectedItem != null && cardsComboBox.SelectedItem != "Виберіть карту")
+            {
+                DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
+                Payment payment = new Payment(clientId, DataStorage.bankCard, DataStorage.cardNumber, DataStorage.cvvCode, DataStorage.expiryDate);
+                payment.Show();
+            }
+            else
+                MessageBox.Show("Будь ласка, виберіть карту перед тим, як продовжити.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

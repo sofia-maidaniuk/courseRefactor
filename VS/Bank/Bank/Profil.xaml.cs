@@ -76,8 +76,8 @@ namespace Bank
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                label_firstname.Content = reader["first_Name"].ToString();
                 label_name.Content = reader["last_Name"].ToString();
+                label_firstname.Content = reader["first_Name"].ToString();
                 label_surname.Content = reader["surname"].ToString();
                 label_phone.Content = reader["phone_Number"].ToString();
 

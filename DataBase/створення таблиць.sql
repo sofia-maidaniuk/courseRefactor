@@ -49,17 +49,6 @@ create table Services(
 	serviceType nvarchar(100) not null
 );
 
-create table personalAccount(
-	ID_Person int identity(1,1) not null primary key,
-	personalAccount nvarchar(10) not null
-);
-
-alter table personalAccount add ID_Service int
-alter table personalAccount add foreign key (ID_Service) references dbo.Services(ID_Service) on delete no action on update cascade
-
-alter table personalAccount add ID_Klient int
-alter table personalAccount add foreign key (ID_Klient) references dbo.Klient(ID_Klient) on delete no action on update cascade
-
 INSERT INTO Services (serviceName, serviceType, serviceBalance) VALUES ('Газопостачання', 'communal', 0);
 INSERT INTO Services (serviceName, serviceType, serviceBalance) VALUES ('Водопостачання', 'communal', 0);
 INSERT INTO Services (serviceName, serviceType, serviceBalance) VALUES ('Вивезення ТВП', 'communal', 0);
@@ -69,7 +58,21 @@ INSERT INTO Services (serviceName, serviceType, serviceBalance) VALUES ('Оплата 
 INSERT INTO Services (serviceName, serviceType, serviceBalance) VALUES ('Інтернет', 'internet', 0);
 INSERT INTO Services (serviceName, serviceType, serviceBalance) VALUES ('Допомога', 'charity', 0);
 
+create table Credits(
+	ID_Credit int identity(1,1) not null primary key,
+	creditTotalSum  DECIMAL(18, 2),
+	creditSum  DECIMAL(18, 2),
+	creditDate date not null, 
+	creditStatus bit not null default 0,
+	repaymentDate date, 
+	repaymentSum DECIMAL(18, 2)
+);
+
+alter table Credits add ID_Card int
+alter table Credits add foreign key (ID_Card) references dbo.BankingCard(ID_Card) on delete no action on update cascade
 
 
+
+DELETE FROM Credits;
 
 
