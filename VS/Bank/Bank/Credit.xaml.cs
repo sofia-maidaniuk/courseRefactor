@@ -136,6 +136,26 @@ namespace Bank
                 return;
             }
 
+            string cardType = "";
+            string checkCardTypeQuery = "SELECT cardType FROM BankingCard WHERE cardNumber = @cardNumber";
+            SqlCommand checkCardTypeCommand = new SqlCommand(checkCardTypeQuery, dataBase.getSqlConnection());
+            checkCardTypeCommand.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
+
+            dataBase.openConnection();
+            SqlDataReader cardTypeReader = checkCardTypeCommand.ExecuteReader();
+            if (cardTypeReader.Read())
+            {
+                cardType = cardTypeReader["cardType"].ToString();
+            }
+            cardTypeReader.Close();
+            dataBase.closeConnection();
+
+            if (cardType != "Кредитна")
+            {
+                MessageBox.Show("Кредит можна взяти лише власникам кредитної карти.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             string checkCreditQuery = "SELECT COUNT(*) FROM Credits WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber)";
             SqlCommand checkCreditCommand = new SqlCommand(checkCreditQuery, dataBase.getSqlConnection());
             checkCreditCommand.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
@@ -147,7 +167,7 @@ namespace Bank
             if (creditCount > 0)
             {
                 MessageBox.Show("У вас вже є активний кредит. Неможливо взяти ще один кредит.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return; 
+                return;
             }
 
             CalcCredit();
@@ -348,7 +368,7 @@ namespace Bank
             commandTransaction.Parameters.AddWithValue("@transactionDestination", DataStorage.cardNumber);
             commandTransaction.Parameters.AddWithValue("@transactionDate", DateTime.Now);
             commandTransaction.Parameters.AddWithValue("@transactionNumber", transactionNumber);
-            commandTransaction.Parameters.AddWithValue("@transactionValue", transactionValue); 
+            commandTransaction.Parameters.AddWithValue("@transactionValue", transactionValue);
             commandTransaction.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
 
             commandTransaction.ExecuteNonQuery();

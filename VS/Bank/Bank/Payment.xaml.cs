@@ -177,8 +177,8 @@ namespace Bank
                     double commissionRate = 0.01;
                     TransferTransaction transaction = new TransferTransaction(commissionRate)
                     {
-                        TransactionType = selectedServiceName,  
-                        TransactionDestination = textBox_bill.Text, 
+                        TransactionType = selectedServiceName,
+                        TransactionDestination = textBox_bill.Text,
                         TransactionDate = transactionDate,
                         TransactionNumber = transactionNumber,
                         TransactionValue = sum
