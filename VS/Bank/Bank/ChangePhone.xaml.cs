@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Bank.DataClasses;
 using System.Data.SqlClient;
 using System.Data;
-using Xceed.Wpf.Toolkit;
+using System.Windows;
+using System.Windows.Controls;
+using Bank.DataClasses;
+using System.Windows.Input;
 using System.Text.RegularExpressions;
-using System.Drawing;
+using Bank.Classes;
 
 namespace Bank
 {
@@ -45,6 +35,21 @@ namespace Bank
             }
 
             var phoneNumber = textBox_phone.Text;
+
+            string queryCheckPhone = "SELECT COUNT(*) FROM Klient WHERE phone_Number = @phoneNumber";
+            SqlCommand checkPhoneCommand = new SqlCommand(queryCheckPhone, dataBase.getSqlConnection());
+            checkPhoneCommand.Parameters.AddWithValue("@phoneNumber", phoneNumber);
+
+            dataBase.openConnection();
+            int phoneCount = (int)checkPhoneCommand.ExecuteScalar();
+
+            if (phoneCount > 0)
+            {
+                MessageBox.Show("Користувач з таким номером телефону вже існує.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                dataBase.closeConnection();
+                return;
+            }
+
             var querystringPhone = $"update Klient set phone_Number = '{phoneNumber}' where ID_Klient = {_clientId}";
             var command = new SqlCommand(querystringPhone, dataBase.getSqlConnection());
             dataBase.openConnection();

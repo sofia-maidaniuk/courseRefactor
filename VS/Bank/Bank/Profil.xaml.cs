@@ -76,7 +76,7 @@ namespace Bank
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                label_name.Content = reader["last_Name"].ToString();
+                label_lastname.Content = reader["last_Name"].ToString();
                 label_firstname.Content = reader["first_Name"].ToString();
                 label_surname.Content = reader["surname"].ToString();
                 label_phone.Content = reader["phone_Number"].ToString();
@@ -101,7 +101,7 @@ namespace Bank
 
         private void ClearFields()
         {
-            label_name.Content = string.Empty;
+            label_lastname.Content = string.Empty;
             label_phone.Content = string.Empty;
         }
 

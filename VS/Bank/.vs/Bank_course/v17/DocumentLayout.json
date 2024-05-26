@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\changepib.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\changepib.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\changephone.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\changephone.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\payment.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\payment.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\sign_up.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\sign_up.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\profil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\profil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\profil.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\profil.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -15,7 +39,7 @@
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\credit.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\addbankcard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\addbankcard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\addbankcard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
@@ -27,20 +51,8 @@
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\validation.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\changepassword.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\changepassword.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\changephone.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\changephone.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\profil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\profil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,57 +74,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AddBankCard.xaml",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AddBankCard.xaml",
-              "RelativeDocumentMoniker": "Bank\\AddBankCard.xaml",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AddBankCard.xaml",
-              "RelativeToolTip": "Bank\\AddBankCard.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-26T18:50:39.387Z",
+              "DocumentIndex": 0,
+              "Title": "ChangePIB.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ChangePIB.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\ChangePIB.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ChangePIB.xaml.cs",
+              "RelativeToolTip": "Bank\\ChangePIB.xaml.cs",
+              "ViewState": "AQIAADsAAAAAAAAAAAAswEEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T20:34:11.221Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "Sign_up.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Sign_up.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\Sign_up.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Sign_up.xaml.cs",
+              "RelativeToolTip": "Bank\\Sign_up.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T20:33:13.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Payment.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Payment.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\Payment.xaml.cs",
               "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Payment.xaml.cs",
               "RelativeToolTip": "Bank\\Payment.xaml.cs",
-              "ViewState": "AQIAAEAAAAAAAAAAAAAwwAsBAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-25T20:06:14.438Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Credit.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Credit.xaml.cs",
-              "RelativeDocumentMoniker": "Bank\\Credit.xaml.cs",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Credit.xaml.cs",
-              "RelativeToolTip": "Bank\\Credit.xaml.cs",
-              "ViewState": "AQIAAIEAAAAAAAAAAAAswJgAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-24T22:35:36.58Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ChangePassword.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ChangePassword.xaml.cs",
-              "RelativeDocumentMoniker": "Bank\\ChangePassword.xaml.cs",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ChangePassword.xaml.cs",
-              "RelativeToolTip": "Bank\\ChangePassword.xaml.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAYwDsAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T22:18:19.441Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "AddBankCard.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AddBankCard.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\AddBankCard.xaml.cs",
@@ -120,12 +121,11 @@
               "RelativeToolTip": "Bank\\AddBankCard.xaml.cs",
               "ViewState": "AQIAACcAAAAAAAAAAAAqwIMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T22:19:43.242Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-23T22:19:43.242Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Bank\\MainWindow.xaml",
@@ -137,39 +137,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "Profil.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Profil.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\Profil.xaml.cs",
               "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Profil.xaml.cs",
               "RelativeToolTip": "Bank\\Profil.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAEAAAA",
+              "ViewState": "AQIAADgAAAAAAAAAAAAgwGcAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T13:49:48.182Z"
+              "WhenOpened": "2024-05-23T13:49:48.182Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "ChangePhone.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ChangePhone.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\ChangePhone.xaml.cs",
               "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ChangePhone.xaml.cs",
               "RelativeToolTip": "Bank\\ChangePhone.xaml.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAYwEEAAAAFAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T22:16:26.8Z"
+              "WhenOpened": "2024-05-23T22:16:26.8Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Validation.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Validation.xaml.cs",
-              "RelativeDocumentMoniker": "Bank\\Validation.xaml.cs",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Validation.xaml.cs",
-              "RelativeToolTip": "Bank\\Validation.xaml.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAwwEwAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T22:56:25.791Z"
+              "Title": "Profil.xaml",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Profil.xaml",
+              "RelativeDocumentMoniker": "Bank\\Profil.xaml",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Profil.xaml",
+              "RelativeToolTip": "Bank\\Profil.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-26T20:35:11.942Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -179,9 +181,57 @@
               "RelativeDocumentMoniker": "Bank\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\MainWindow.xaml.cs",
               "RelativeToolTip": "Bank\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAMgAAAAAAAAAAAA6wNcAAAA1AAAA",
+              "ViewState": "AQIAALQAAAAAAAAAAAAIwMcAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-24T23:01:32.772Z"
+              "WhenOpened": "2024-05-24T23:01:32.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ChangePassword.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ChangePassword.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\ChangePassword.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ChangePassword.xaml.cs",
+              "RelativeToolTip": "Bank\\ChangePassword.xaml.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAYwDsAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-23T22:18:19.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Credit.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Credit.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\Credit.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Credit.xaml.cs",
+              "RelativeToolTip": "Bank\\Credit.xaml.cs",
+              "ViewState": "AQIAAIEAAAAAAAAAAAAswJgAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T22:35:36.58Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AddBankCard.xaml",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AddBankCard.xaml",
+              "RelativeDocumentMoniker": "Bank\\AddBankCard.xaml",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AddBankCard.xaml",
+              "RelativeToolTip": "Bank\\AddBankCard.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-26T18:50:39.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Validation.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Validation.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\Validation.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Validation.xaml.cs",
+              "RelativeToolTip": "Bank\\Validation.xaml.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAwwEwAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T22:56:25.791Z"
             }
           ]
         }

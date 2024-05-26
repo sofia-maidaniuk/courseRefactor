@@ -195,7 +195,9 @@ namespace Bank
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
+            Log_in log_in = new Log_in();
+            log_in.Show();
+            this.Close();
         }
 
         private void button_credit_Click(object sender, RoutedEventArgs e)

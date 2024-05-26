@@ -47,6 +47,23 @@ namespace Bank
             var lastName = textBox_lastname.Text;
             var name = textBox_name.Text;
             var surname = textBox_surname.Text;
+
+            string queryCheckPIB = "SELECT COUNT(*) FROM Klient WHERE last_Name = @lastName AND first_Name = @name AND surname = @surname";
+            SqlCommand checkPIBCommand = new SqlCommand(queryCheckPIB, dataBase.getSqlConnection());
+            checkPIBCommand.Parameters.AddWithValue("@lastName", lastName);
+            checkPIBCommand.Parameters.AddWithValue("@name", name);
+            checkPIBCommand.Parameters.AddWithValue("@surname", surname);
+
+            dataBase.openConnection();
+            int pibCount = (int)checkPIBCommand.ExecuteScalar();
+
+            if (pibCount > 0)
+            {
+                MessageBox.Show("Користувач з таким ПІБ вже існує.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                dataBase.closeConnection();
+                return;
+            }
+
             var querystringPIB = $"update Klient set last_Name = '{lastName}', first_Name = '{name}', surname = '{surname}' where ID_Klient = {_clientId}";
             var command = new SqlCommand(querystringPIB, dataBase.getSqlConnection());
             dataBase.openConnection();
