@@ -30,24 +30,33 @@ namespace Bank
                     "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'",
                     dataBase.getSqlConnection()))
                 {
+                    // Встановлюємо час очікування команди
+                    command.CommandTimeout = 60; // збільшуємо час очікування до 60 секунд
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             string tableName = reader["TABLE_NAME"].ToString();
 
-                            // Створюємо вкладку для таблиці
-                            TabItem tabItem = new TabItem
+                            // Перевіряємо, чи належить таблиця до списку потрібних таблиць
+                            if (tableName == "Klient" || tableName == "BankingCard" ||
+                                tableName == "Transactions" || tableName == "Credits" ||
+                                tableName == "Deposits")
                             {
-                                Header = tableName,
-                                Content = new DataGrid
+                                // Створюємо вкладку для таблиці
+                                TabItem tabItem = new TabItem
                                 {
-                                    AutoGenerateColumns = true,
-                                    Name = $"DataGrid_{tableName}"
-                                }
-                            };
+                                    Header = tableName,
+                                    Content = new DataGrid
+                                    {
+                                        AutoGenerateColumns = true,
+                                        Name = $"DataGrid_{tableName}"
+                                    }
+                                };
 
-                            tabs.Items.Add(tabItem);
+                                tabs.Items.Add(tabItem);
+                            }
                         }
                     }
                 }
@@ -61,6 +70,8 @@ namespace Bank
                 dataBase.closeConnection();
             }
         }
+
+
 
         private void LoadTableData(string tableName, DataGrid dataGrid)
         {
@@ -215,15 +226,15 @@ namespace Bank
         private void Add_Credit()
         {
             AddDataWindow addDataWindow = new AddDataWindow(new List<string>
-    {
-        "@creditTotalSum",
-        "@creditSum",
-        "@creditDate",
-        "@creditStatus",
-        "@repaymentDate",
-        "@repaymentSum",
-        "@ID_Card"
-    });
+            {
+                "@creditTotalSum",
+                "@creditSum",
+                "@creditDate",
+                "@creditStatus",
+                "@repaymentDate",
+                "@repaymentSum",
+                "@ID_Card"
+            });
 
             if (addDataWindow.ShowDialog() == true)
             {
@@ -246,7 +257,7 @@ namespace Bank
                 // Перевіряємо, чи repaymentSum вказано
                 if (string.IsNullOrEmpty(inputData[5])) parameters.Add("@repaymentSum", DBNull.Value);
                 else parameters.Add("@repaymentSum", decimal.Parse(inputData[5]));
-                
+
 
                 // Виклик збереженої процедури
                 ExecuteStoredProcedure("insert_credit", parameters);
@@ -312,9 +323,9 @@ namespace Bank
 
         private void Delete_Record(object sender, RoutedEventArgs e)
         {
-            
+
         }
-        
+
         private void Upd_Table(object sender, RoutedEventArgs e)
         {
 
