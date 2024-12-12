@@ -9,7 +9,7 @@ namespace Bank
 {
     public class DataBase
     {
-        SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-GVGBHQN\SQLEXPRESS;Initial Catalog=Bank;Integrated Security=True");
+        SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-GVGBHQN\SQLEXPRESS;Initial Catalog=BankingAplication;Integrated Security=True");
 
 
         public void openConnection()

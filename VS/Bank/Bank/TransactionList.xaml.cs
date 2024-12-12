@@ -25,16 +25,23 @@ namespace Bank
 
         private void LoadDataIntoGrid()
         {
-            string queryString = @"SELECT Transactions.transactionType, Transactions.transactionDestination, 
-                           FORMAT(Transactions.transactionDate, 'yyyy-MM-dd') AS transactionDate, 
-                           Transactions.transactionNumber, Transactions.transactionValue 
-                           FROM Transactions 
-                           JOIN BankingCard ON Transactions.ID_Card = BankingCard.ID_Card 
-                           JOIN Klient ON Klient.ID_Klient = BankingCard.ID_Klient 
-                           WHERE Klient.ID_Klient = @clientId";
+            string queryString = @"
+        SELECT 
+            Transactions.transactionType, 
+            Transactions.transactionDestination, 
+            FORMAT(Transactions.transactionDate, 'yyyy-MM-dd') AS transactionDate, 
+            Transactions.transactionNumber, 
+            Transactions.transactionValue 
+        FROM Transactions
+        LEFT JOIN BankingCard ON Transactions.ID_Card = BankingCard.ID_Card
+        LEFT JOIN Deposits ON Transactions.transactionNumber LIKE CONCAT('DP-', Deposits.ID_Deposit)
+        WHERE 
+            (BankingCard.ID_Klient = @clientId OR Deposits.ID_Klient = @clientId)";
+
             DataTable dataTable = GetDataFromDatabase(queryString, _clientId);
             dataGrid.ItemsSource = dataTable.DefaultView;
         }
+
 
 
         private DataTable GetDataFromDatabase(string queryString, int clientId)

@@ -224,5 +224,18 @@ namespace Bank
             else
                 MessageBox.Show("Будь ласка, виберіть карту перед тим, як продовжити.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+
+        private void button_deposit_Click(object sender, RoutedEventArgs e)
+        {
+            if (cardsComboBox.SelectedItem != null && cardsComboBox.SelectedItem != "Виберіть карту")
+            {
+                DataStorage.cardNumber = cardsComboBox.SelectedItem.ToString();
+
+                Deposit deposit = new Deposit(clientId);
+                deposit.Show();
+            }
+            else
+                MessageBox.Show("Будь ласка, виберіть карту перед тим, як продовжити.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 }

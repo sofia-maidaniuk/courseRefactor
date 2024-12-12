@@ -1,0 +1,90 @@
+﻿<Window x:Class="Bank.Deposit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank"
+        mc:Ignorable="d"  WindowStartupLocation="CenterScreen"
+        Title="Deposit" Height="800" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="110"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FF03045E" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Photo/3.png" Width="110" Height="110" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,5,10,0"/>
+                <TextBlock Text="LABANK" Foreground="White" FontFamily="Tenor Sans" FontSize="36" Height="45" VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0">
+            <Border x:Name="makeCredit" Width="470" Height="310" CornerRadius="66" Background="#ADADC8" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0"/>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="20,50,0,0">
+                    <TextBlock Text="Сума депозиту:" FontSize="16" Width="200"/>
+                    <TextBox x:Name="textBoxDepositAmount" Width="200" FontSize="16" FontFamily="Tenor Sans"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="20,10,0,0">
+                    <TextBlock Text="Процентна ставка (%):" FontSize="16" Width="200" FontFamily="Tenor Sans"/>
+                    <TextBox x:Name="textBoxInterestRate" Width="200" FontSize="16" IsReadOnly="True"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="20,10,0,0">
+                    <TextBlock Text="Термін депозиту (місяців):" FontSize="16" Width="200"/>
+                    <ComboBox x:Name="comboBoxTerm" Width="200" FontSize="16" SelectionChanged="ComboBoxTerm_SelectionChanged">
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="12"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="20,10,0,0">
+                    <TextBlock Text="Нараховані відсотки:" FontSize="16" Width="200" FontFamily="Tenor Sans"/>
+                    <TextBlock x:Name="labelCalculatedInterest" FontSize="16" Width="200"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Button x:Name="button_deposit" Content="Обчислити" FontFamily="Tenor Sans" Background="#03045E"  Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,120,110,0"
+        FontSize="36" Height="50" Width="250" Cursor="Hand" Click="ButtonCalculate_Click" Foreground="White" IsDefault="True">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="30">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="button_depositCreate" Content="Створити депозит" FontFamily="Tenor Sans" Background="#03045E"  Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,180,30,0"
+        FontSize="36" Height="50" Width="400" Cursor="Hand" Click="ButtonCreateDeposit_Click" Foreground="White" IsDefault="True">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="30">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Grid Grid.Row="2" Margin="20">
+            <TextBlock Text="Існуючі депозити:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <DataGrid x:Name="dataGridDeposits" AutoGenerateColumns="True" CanUserAddRows="False" Height="180"/>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid Grid.Row="3" Background="#FF03045E" Margin="0,0,0,0">
+            <TextBlock x:Name="exit_label" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontFamily="Tenor Sans" MouseLeftButtonDown="Exit_Click" Cursor="Hand" Margin="0,20,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Photo/exit.png" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/> 
+                <TextBlock Text="Вихід" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>   
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Window>

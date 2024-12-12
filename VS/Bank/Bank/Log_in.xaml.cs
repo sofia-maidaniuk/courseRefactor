@@ -3,8 +3,6 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Controls;
-
 
 namespace Bank
 {
@@ -22,34 +20,57 @@ namespace Bank
 
         private void button_Log_in_Click(object sender, RoutedEventArgs e)
         {
-            var loginUser = textBox_login.Text;
-            var passUser = passwordBox_password.Password;
-
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            DataTable table = new DataTable();
-
-            dataBase.openConnection();
-
-            string querystring = $"select ID_Klient, phone_Number, password_user from Klient where phone_Number = '{loginUser}' and password_user = '{passUser}'";
-
-            SqlCommand command = new SqlCommand(querystring, dataBase.getSqlConnection());
-
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
-
-            object result = command.ExecuteScalar();
-
-            if (table.Rows.Count == 1)
+            try
             {
-                int idKlient = (int)result;
-                MessageBox.Show("Ви успішно увійшли!", "Успішно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                MainWindow MainWindow = new MainWindow(idKlient);
-                MainWindow.Show();
-                dataBase.closeConnection();
-                this.Close();
+                var loginUser = textBox_login.Text.Trim();
+                var passUser = passwordBox_password.Password.Trim();
+
+                dataBase.openConnection();
+
+                // Перевірка ролі sysadmin
+                string roleQuery = "SELECT IS_SRVROLEMEMBER('sysadmin')";
+                SqlCommand roleCommand = new SqlCommand(roleQuery, dataBase.getSqlConnection());
+                int isAdmin = (int)roleCommand.ExecuteScalar();
+
+                if (isAdmin == 1 && loginUser == "admin_bank" && passUser == "admin1234")
+                {
+                    MessageBox.Show("Ви успішно увійшли як адміністратор!", "Успішно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    AdminWindow adminWindow = new AdminWindow();
+                    adminWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    // Перевірка звичайного користувача
+                    string userQuery = "SELECT ID_Klient FROM Klient WHERE phone_Number = @login AND password_user = @password";
+                    SqlCommand userCommand = new SqlCommand(userQuery, dataBase.getSqlConnection());
+                    userCommand.Parameters.AddWithValue("@login", loginUser);
+                    userCommand.Parameters.AddWithValue("@password", passUser);
+
+                    object result = userCommand.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        int idKlient = Convert.ToInt32(result);
+                        MessageBox.Show("Ви успішно увійшли!", "Успішно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MainWindow mainWindow = new MainWindow(idKlient);
+                        mainWindow.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Такого акаунту не існує або \nНе правильний пароль!", "Акаунту не існує!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
             }
-            else
-                MessageBox.Show("Такого акаунту не існує або \nНе правильний пароль!", "Акаунту не існує!", MessageBoxButton.OK, MessageBoxImage.Error);
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                dataBase.closeConnection();
+            }
         }
 
         private void Log_in_KeyDown(object sender, KeyEventArgs e)
