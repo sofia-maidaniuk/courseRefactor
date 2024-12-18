@@ -294,7 +294,7 @@ namespace Bank
 
         private int ExecuteStoredProcedure(string procedureName, Dictionary<string, object> parameters)
         {
-            int rowsAffected = 0;
+            int rowsAffected = -1; // Значення за замовчуванням, якщо сталася помилка
 
             try
             {
@@ -319,9 +319,8 @@ namespace Bank
                 dataBase.closeConnection();
             }
 
-            return rowsAffected; // Повертаємо кількість змінених рядків
+            return rowsAffected; // Повертаємо кількість змінених рядків (або -1 у разі помилки)
         }
-
 
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)
@@ -333,12 +332,10 @@ namespace Bank
 
         private void Upd_Record(object sender, RoutedEventArgs e)
         {
-            // Перевіряємо, чи обрано вкладку та рядок
             if (tabs.SelectedItem is TabItem selectedTab && selectedTab.Content is DataGrid dataGrid)
             {
                 if (dataGrid.SelectedItem is DataRowView selectedRow)
                 {
-                    // Словник первинних ключів для таблиць
                     var primaryKeys = new Dictionary<string, string>
             {
                 { "Klient", "ID_Klient" },
@@ -353,10 +350,8 @@ namespace Bank
 
                     if (primaryKeys.TryGetValue(tableName, out string primaryKey))
                     {
-                        // Отримуємо значення первинного ключа
                         int id = Convert.ToInt32(selectedRow[primaryKey]);
 
-                        // Формуємо список параметрів для вікна редагування
                         List<string> parameters = new List<string>();
                         Dictionary<string, string> initialValues = new Dictionary<string, string>();
 
@@ -365,17 +360,15 @@ namespace Bank
                             string columnName = column.ColumnName;
                             string columnValue = selectedRow[columnName]?.ToString() ?? string.Empty;
 
-                            if (columnName != primaryKey) // Виключаємо первинний ключ
+                            if (columnName != primaryKey)
                             {
                                 parameters.Add($"@{columnName}");
                                 initialValues[$"@{columnName}"] = columnValue;
                             }
                         }
 
-                        // Відкриваємо вікно редагування даних
                         AddDataWindow editWindow = new AddDataWindow(parameters);
 
-                        // Передаємо початкові значення у текстові поля
                         editWindow.Loaded += (s, args) =>
                         {
                             foreach (var field in initialValues)
@@ -392,13 +385,11 @@ namespace Bank
                             }
                         };
 
-                        // Якщо користувач натиснув "Зберегти"
                         if (editWindow.ShowDialog() == true)
                         {
-                            // Збираємо оновлені дані
                             var updatedData = new Dictionary<string, object>
                     {
-                        { $"@{primaryKey}", id } // Додаємо первинний ключ для ідентифікації запису
+                        { $"@{primaryKey}", id }
                     };
 
                             for (int i = 0; i < parameters.Count; i++)
@@ -406,12 +397,17 @@ namespace Bank
                                 updatedData[parameters[i]] = editWindow.CollectedData[i];
                             }
 
-                            // Викликаємо збережену процедуру для оновлення
-                            ExecuteStoredProcedure($"update_{tableName.ToLower()}", updatedData);
+                            int result = ExecuteStoredProcedure($"update_{tableName.ToLower()}", updatedData);
 
-                            // Оновлюємо таблицю після редагування
-                            LoadTableData(tableName, dataGrid);
-                            MessageBox.Show("Запис успішно оновлено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                            if (result > 0)
+                            {
+                                LoadTableData(tableName, dataGrid);
+                                MessageBox.Show("Запис успішно оновлено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Не вдалося оновити запис. Перевірте дані або спробуйте ще раз.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
                         }
                     }
                     else
@@ -429,6 +425,7 @@ namespace Bank
                 MessageBox.Show("Оберіть вкладку таблиці.", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
 
 
         private void Delete_Record(object sender, RoutedEventArgs e)
