@@ -22,7 +22,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <TabControl x:Name="tabs" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="tabs_SelectionChanged">
+            <TabControl x:Name="tabs" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             </TabControl>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="40">

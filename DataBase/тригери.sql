@@ -1,7 +1,8 @@
 use BankingAplication
 
---використані тригери
---Автоматичне створення запису транзакції після створення нового депозиту AFTER INSERT
+-- використані тригери
+-- ТРИГЕР 1
+-- Автоматичне створення запису транзакції після створення нового депозиту AFTER INSERT
 CREATE TRIGGER LogDepositTransaction
 ON Deposits
 AFTER INSERT
@@ -22,7 +23,7 @@ SELECT name, is_disabled
 FROM sys.triggers
 WHERE name = 'LogDepositTransaction';
 
-
+-- ТРИГЕР 2
 -- Тригер для обробки кредиту після вставки у вікні адміністрування
 CREATE TRIGGER trg_UpdateCardBalanceOnCredit
 ON Credits
@@ -86,7 +87,8 @@ BEGIN
     END
 END;
 
---автоматично списує кошти з банківської картки клієнта, коли створюється новий депозит у вікні адміна
+-- ТРИГЕР 3
+-- автоматично списує кошти з банківської картки клієнта, коли створюється новий депозит у вікні адміна
 CREATE TRIGGER DeductFromCardOnDeposit
 ON Deposits
 AFTER INSERT
@@ -124,4 +126,52 @@ BEGIN
         ROLLBACK TRANSACTION;
     END
 END;
+
+-- ТРИГЕР 4
+-- тригер, щоб під час видалення клієнта усі дані по'язані з ним автоматично видалялися 
+CREATE TRIGGER trg_DeleteKlient
+ON Klient
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Видаляємо депозити, пов'язані з клієнтом
+    DELETE FROM Deposits
+    WHERE ID_Klient IN (SELECT ID_Klient FROM deleted);
+
+    -- Видаляємо банківські карти, пов'язані з клієнтом
+    DELETE FROM BankingCard
+    WHERE ID_Klient IN (SELECT ID_Klient FROM deleted);
+
+    -- Видаляємо самого клієнта
+    DELETE FROM Klient
+    WHERE ID_Klient IN (SELECT ID_Klient FROM deleted);
+END;
+
+
+-- тригер, щоб під час видалення клієнта усі дані по'язані з ним автоматично видалялися 
+CREATE TRIGGER trg_DeleteBankingCard
+ON BankingCard
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Видаляємо транзакції, пов'язані з банківською картою
+    DELETE FROM Transactions
+    WHERE ID_Card IN (SELECT ID_Card FROM deleted);
+
+    -- Видаляємо кредити, пов'язані з банківською картою
+    DELETE FROM Credits
+    WHERE ID_Card IN (SELECT ID_Card FROM deleted);
+
+    -- Видаляємо банківську карту
+    DELETE FROM BankingCard
+    WHERE ID_Card IN (SELECT ID_Card FROM deleted);
+END;
+
+
+DELETE FROM Klient
+WHERE ID_Klient = 13;
 

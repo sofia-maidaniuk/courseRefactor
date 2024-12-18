@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,33 +31,54 @@ namespace Bank
                     "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'",
                     dataBase.getSqlConnection()))
                 {
-                    // Встановлюємо час очікування команди
-                    command.CommandTimeout = 60; // збільшуємо час очікування до 60 секунд
-
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
+                        List<string> tableNames = new List<string>();
+
+                        // Зчитуємо всі таблиці та зберігаємо їх у списку
                         while (reader.Read())
                         {
                             string tableName = reader["TABLE_NAME"].ToString();
-
-                            // Перевіряємо, чи належить таблиця до списку потрібних таблиць
                             if (tableName == "Klient" || tableName == "BankingCard" ||
                                 tableName == "Transactions" || tableName == "Credits" ||
-                                tableName == "Deposits")
+                                tableName == "Deposits" || tableName == "Services")
                             {
-                                // Створюємо вкладку для таблиці
-                                TabItem tabItem = new TabItem
-                                {
-                                    Header = tableName,
-                                    Content = new DataGrid
-                                    {
-                                        AutoGenerateColumns = true,
-                                        Name = $"DataGrid_{tableName}"
-                                    }
-                                };
-
-                                tabs.Items.Add(tabItem);
+                                tableNames.Add(tableName);
                             }
+                        }
+
+                        reader.Close(); // Закриваємо DataReader, щоб звільнити з'єднання
+
+                        // Тепер завантажуємо дані для кожної таблиці
+                        foreach (var tableName in tableNames)
+                        {
+                            // Створюємо DataGrid
+                            DataGrid dataGrid = new DataGrid
+                            {
+                                AutoGenerateColumns = true,
+                                SelectionMode = DataGridSelectionMode.Single,
+                                SelectionUnit = DataGridSelectionUnit.FullRow,
+                                IsReadOnly = true,
+                                Name = $"DataGrid_{tableName}"
+                            };
+
+                            dataGrid.SelectionChanged += (s, e) =>
+                            {
+                                
+                            };
+
+
+                            // Завантажуємо дані для DataGrid
+                            LoadTableData(tableName, dataGrid);
+
+                            // Створюємо вкладку для таблиці
+                            TabItem tabItem = new TabItem
+                            {
+                                Header = tableName,
+                                Content = dataGrid
+                            };
+
+                            tabs.Items.Add(tabItem);
                         }
                     }
                 }
@@ -67,10 +89,9 @@ namespace Bank
             }
             finally
             {
-                dataBase.closeConnection();
+                dataBase.closeConnection(); // Закриваємо з'єднання
             }
         }
-
 
 
         private void LoadTableData(string tableName, DataGrid dataGrid)
@@ -84,31 +105,19 @@ namespace Bank
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
 
-                dataGrid.ItemsSource = dataTable.DefaultView;
+                dataGrid.ItemsSource = null; // Очищаємо попередні дані
+                dataGrid.ItemsSource = dataTable.DefaultView; // Завантажуємо нові дані
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Помилка при завантаженні даних таблиці {tableName}: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Помилка при завантаженні даних таблиці {tableName}: {ex.Message}",
+                                "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
                 dataBase.closeConnection();
             }
         }
-
-        private void tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (tabs.SelectedItem is TabItem selectedTab)
-            {
-                string tableName = selectedTab.Header.ToString();
-                if (selectedTab.Content is DataGrid dataGrid)
-                {
-                    LoadTableData(tableName, dataGrid);
-                }
-            }
-        }
-
-
 
         private void Add_Record(object sender, RoutedEventArgs e)
         {
@@ -283,8 +292,10 @@ namespace Bank
             }
         }
 
-        private void ExecuteStoredProcedure(string procedureName, Dictionary<string, object> parameters)
+        private int ExecuteStoredProcedure(string procedureName, Dictionary<string, object> parameters)
         {
+            int rowsAffected = 0;
+
             try
             {
                 dataBase.openConnection();
@@ -295,19 +306,23 @@ namespace Bank
                     {
                         command.Parameters.AddWithValue(param.Key, param.Value);
                     }
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Запис успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    rowsAffected = command.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Помилка під час додавання запису: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Помилка під час виконання процедури: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
                 dataBase.closeConnection();
             }
+
+            return rowsAffected; // Повертаємо кількість змінених рядків
         }
+
+
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)
         {
@@ -318,17 +333,178 @@ namespace Bank
 
         private void Upd_Record(object sender, RoutedEventArgs e)
         {
+            // Перевіряємо, чи обрано вкладку та рядок
+            if (tabs.SelectedItem is TabItem selectedTab && selectedTab.Content is DataGrid dataGrid)
+            {
+                if (dataGrid.SelectedItem is DataRowView selectedRow)
+                {
+                    // Словник первинних ключів для таблиць
+                    var primaryKeys = new Dictionary<string, string>
+            {
+                { "Klient", "ID_Klient" },
+                { "BankingCard", "ID_Card" },
+                { "Transactions", "ID_transaction" },
+                { "Credits", "ID_Credit" },
+                { "Deposits", "ID_Deposit" },
+                { "Services", "ID_Service" }
+            };
 
+                    string tableName = selectedTab.Header.ToString();
+
+                    if (primaryKeys.TryGetValue(tableName, out string primaryKey))
+                    {
+                        // Отримуємо значення первинного ключа
+                        int id = Convert.ToInt32(selectedRow[primaryKey]);
+
+                        // Формуємо список параметрів для вікна редагування
+                        List<string> parameters = new List<string>();
+                        Dictionary<string, string> initialValues = new Dictionary<string, string>();
+
+                        foreach (DataColumn column in selectedRow.DataView.Table.Columns)
+                        {
+                            string columnName = column.ColumnName;
+                            string columnValue = selectedRow[columnName]?.ToString() ?? string.Empty;
+
+                            if (columnName != primaryKey) // Виключаємо первинний ключ
+                            {
+                                parameters.Add($"@{columnName}");
+                                initialValues[$"@{columnName}"] = columnValue;
+                            }
+                        }
+
+                        // Відкриваємо вікно редагування даних
+                        AddDataWindow editWindow = new AddDataWindow(parameters);
+
+                        // Передаємо початкові значення у текстові поля
+                        editWindow.Loaded += (s, args) =>
+                        {
+                            foreach (var field in initialValues)
+                            {
+                                if (editWindow.DataPanel.Children
+                                    .OfType<StackPanel>()
+                                    .FirstOrDefault(sp => sp.Children.OfType<Label>().FirstOrDefault()?.Content.ToString() == field.Key.Replace("@", "")) is StackPanel fieldPanel)
+                                {
+                                    if (fieldPanel.Children.OfType<TextBox>().FirstOrDefault() is TextBox textBox)
+                                    {
+                                        textBox.Text = field.Value;
+                                    }
+                                }
+                            }
+                        };
+
+                        // Якщо користувач натиснув "Зберегти"
+                        if (editWindow.ShowDialog() == true)
+                        {
+                            // Збираємо оновлені дані
+                            var updatedData = new Dictionary<string, object>
+                    {
+                        { $"@{primaryKey}", id } // Додаємо первинний ключ для ідентифікації запису
+                    };
+
+                            for (int i = 0; i < parameters.Count; i++)
+                            {
+                                updatedData[parameters[i]] = editWindow.CollectedData[i];
+                            }
+
+                            // Викликаємо збережену процедуру для оновлення
+                            ExecuteStoredProcedure($"update_{tableName.ToLower()}", updatedData);
+
+                            // Оновлюємо таблицю після редагування
+                            LoadTableData(tableName, dataGrid);
+                            MessageBox.Show("Запис успішно оновлено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Первинний ключ не знайдено для таблиці.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Оберіть рядок для редагування.", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Оберіть вкладку таблиці.", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
+
 
         private void Delete_Record(object sender, RoutedEventArgs e)
         {
+            if (tabs.SelectedItem is TabItem selectedTab && selectedTab.Content is DataGrid dataGrid)
+            {
+                if (dataGrid.SelectedItem is DataRowView selectedRow)
+                {
+                    // Словник первинних ключів для таблиць
+                    var primaryKeys = new Dictionary<string, string>
+                {
+                    { "Klient", "ID_Klient" },
+                    { "BankingCard", "ID_BankingCard" },
+                    { "Transactions", "ID_Transactions" },
+                    { "Credits", "ID_Credits" },
+                    { "Deposits", "ID_Deposit" },
+                    { "Services", "ID_Service" }
+                };
 
+                    string tableName = selectedTab.Header.ToString();
+
+                    if (primaryKeys.TryGetValue(tableName, out string primaryKey))
+                    {
+                        try
+                        {
+                            // Отримуємо значення первинного ключа
+                            int id = Convert.ToInt32(selectedRow[primaryKey]);
+
+                            int rowsAffected = ExecuteStoredProcedure($"delete_{tableName.ToLower()}", new Dictionary<string, object> { { "@id", id } });
+
+                            if (rowsAffected > 0)
+                            {
+                                // Оновлюємо дані в таблиці після видалення
+                                LoadTableData(tableName, dataGrid);
+                                MessageBox.Show("Запис успішно видалено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Запис не було видалено. Можливо, він не існує або є помилка у базі даних.", "Попередження", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Помилка при видаленні запису: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Первинний ключ не знайдено для таблиці.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Оберіть рядок для видалення.", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Оберіть вкладку таблиці.", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
+
 
         private void Upd_Table(object sender, RoutedEventArgs e)
         {
-
+            if (tabs.SelectedItem is TabItem selectedTab && selectedTab.Content is DataGrid dataGrid)
+            {
+                string tableName = selectedTab.Header.ToString(); // Отримуємо назву таблиці
+                LoadTableData(tableName, dataGrid); // Перезавантажуємо дані у DataGrid
+                MessageBox.Show("Дані успішно оновлено!", "Оновлення", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Оберіть вкладку для оновлення даних.", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
+
     }
 }

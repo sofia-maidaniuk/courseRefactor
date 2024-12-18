@@ -1,6 +1,7 @@
 use BankingAplication
 
---використані процедури
+-- використані процедури
+-- ПРОЦЕДУРА 1
 CREATE PROCEDURE GetTotalCounts
 AS
 BEGIN
@@ -23,7 +24,8 @@ END;
 
 EXEC GetTotalCounts;
 
---вставка в таблицю клієнта 
+-- ПРОЦЕДУРА 2.1
+-- вставка в таблицю клієнта 
 CREATE PROCEDURE insert_klient
     @last_Name NVARCHAR(20),
     @first_Name NVARCHAR(20),
@@ -41,6 +43,7 @@ BEGIN
     VALUES (@last_Name, @first_Name, @surname, @passport_Number, @phone_Number, @id_kod, @birthday, @password_user, @registration_Date, @photoData);
 END;
 
+-- ПРОЦЕДУРА 2.2
 -- вставка в таблицю банк карти
 CREATE PROCEDURE insert_bankingCard
     @cardType NVARCHAR(50),
@@ -58,6 +61,7 @@ BEGIN
     VALUES (@cardType, @cardNumber, @cvvCode, @balance, @currency, @paySystem, @cardDate, @pin, @ID_Klient);
 END;
 
+-- ПРОЦЕДУРА 2.3
 --вставка транзакцій
 CREATE PROCEDURE insert_transaction
     @transactionType NVARCHAR(50),
@@ -72,6 +76,7 @@ BEGIN
     VALUES (@transactionType, @transactionDestination, @transactionDate, @transactionNumber, @transactionValue, @ID_Card);
 END;
 
+-- ПРОЦЕДУРА 2.4
 --вставка сервісів
 CREATE PROCEDURE insert_service
     @serviceName NVARCHAR(100),
@@ -83,6 +88,7 @@ BEGIN
     VALUES (@serviceName, @serviceBalance, @serviceType);
 END;
 
+-- ПРОЦЕДУРА 2.5
 --вставка кредитів
 CREATE PROCEDURE insert_credit
     @creditTotalSum DECIMAL(18, 2),
@@ -98,6 +104,7 @@ BEGIN
     VALUES (@creditTotalSum, @creditSum, @creditDate, @creditStatus, @repaymentDate, @repaymentSum, @ID_Card);
 END;
 
+-- ПРОЦЕДУРА 2.6
 --вставка депозитів
 CREATE PROCEDURE insert_deposit
     @depositAmount DECIMAL(18, 2),
@@ -111,6 +118,67 @@ BEGIN
     INSERT INTO Deposits (depositAmount, depositDate, interestRate, termInMonths, isProcessed, ID_Klient)
     VALUES (@depositAmount, @depositDate, @interestRate, @termInMonths, @isProcessed, @ID_Klient);
 END;
+
+-- ПРОЦЕДУРА 3.1
+-- видалення поля з таблиці клієнт
+CREATE PROCEDURE delete_klient
+    @id INT
+AS
+BEGIN
+    DELETE FROM Klient WHERE ID_Klient = @id;
+END;
+
+-- ПРОЦЕДУРА 3.2
+-- видалення поля з таблиці банківська карта
+CREATE PROCEDURE delete_bankingCard
+    @id INT
+AS
+BEGIN
+    DELETE FROM BankingCard WHERE ID_Card = @id;
+END;
+
+-- ПРОЦЕДУРА 3.3
+-- видалення поля з таблиці транзакції
+CREATE PROCEDURE delete_transaction
+    @id INT
+AS
+BEGIN
+    DELETE FROM Transactions WHERE ID_transaction = @id;
+END;
+
+-- ПРОЦЕДУРА 3.4
+-- видалення поля з таблиці кредитів
+CREATE PROCEDURE delete_credit
+    @id INT
+AS
+BEGIN
+    DELETE FROM Credits WHERE ID_Credit = @id;
+END;
+
+-- ПРОЦЕДУРА 3.4
+-- видалення поля з таблиці депозитів
+CREATE PROCEDURE delete_deposits
+    @id INT
+AS
+BEGIN
+    DELETE FROM Deposits WHERE ID_Deposit = @id;
+END;
+
+-- ПРОЦЕДУРА 3.5
+-- видалення поля з таблиці сервісів
+CREATE PROCEDURE delete_services
+    @id INT
+AS
+BEGIN
+    DELETE FROM Services WHERE ID_Service = @id;
+END;
+
+
+SELECT COLUMN_NAME 
+FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+WHERE TABLE_NAME = 'Deposits';
+
+
 
 
 

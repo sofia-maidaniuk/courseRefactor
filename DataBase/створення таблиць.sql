@@ -72,7 +72,18 @@ alter table Credits add ID_Card int
 alter table Credits add foreign key (ID_Card) references dbo.BankingCard(ID_Card) on delete no action on update cascade
 
 
+CREATE TABLE Deposits (
+    ID_Deposit INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    depositAmount DECIMAL(18, 2) NOT NULL,
+    depositDate DATE NOT NULL,
+    interestRate DECIMAL(5, 2)
+);
 
-DELETE FROM Credits;
+ALTER TABLE Deposits ADD termInMonths INT NOT NULL DEFAULT 3;
+ALTER TABLE Deposits ADD isProcessed BIT DEFAULT 0;
+
+INSERT INTO Deposits (depositAmount, depositDate, interestRate, ID_Klient, termInMonths, isProcessed) 
+VALUES (3000.00, '2024-09-10', 10.00, 1, 3, 0);
+
 
 
