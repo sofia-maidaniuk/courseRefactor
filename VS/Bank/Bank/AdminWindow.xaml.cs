@@ -89,5 +89,12 @@ namespace Bank
             dbWindow.Show();
             this.Close();
         }
+
+        private void ShowClientDetails_Click(object sender, RoutedEventArgs e)
+        {
+            ClientDetailsWindow detailsWindow = new ClientDetailsWindow();
+            detailsWindow.Show();
+        }
+
     }
 }

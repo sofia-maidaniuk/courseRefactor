@@ -155,7 +155,7 @@ BEGIN
     DELETE FROM Credits WHERE ID_Credit = @id;
 END;
 
--- ПРОЦЕДУРА 3.4
+-- ПРОЦЕДУРА 3.5
 -- видалення поля з таблиці депозитів
 CREATE PROCEDURE delete_deposits
     @id INT
@@ -164,7 +164,7 @@ BEGIN
     DELETE FROM Deposits WHERE ID_Deposit = @id;
 END;
 
--- ПРОЦЕДУРА 3.5
+-- ПРОЦЕДУРА 3.6
 -- видалення поля з таблиці сервісів
 CREATE PROCEDURE delete_services
     @id INT
@@ -174,12 +174,203 @@ BEGIN
 END;
 
 
-SELECT COLUMN_NAME 
-FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
-WHERE TABLE_NAME = 'Deposits';
+-- ПРОЦЕДУРА 4.1
+-- оновлення поля в таблиці клієнтів
+CREATE PROCEDURE update_klient
+    @ID_Klient INT,
+    @last_Name NVARCHAR(20),
+    @first_Name NVARCHAR(20),
+    @surname NVARCHAR(20),
+    @passport_Number CHAR(9),
+    @phone_Number CHAR(13),
+    @id_kod CHAR(10),
+    @birthday DATE,
+    @password_user VARCHAR(50),
+    @registration_Date DATE,
+    @photoData VARBINARY(MAX)
+AS
+BEGIN
+    UPDATE Klient
+    SET last_Name = @last_Name,
+        first_Name = @first_Name,
+        surname = @surname,
+        passport_Number = @passport_Number,
+        phone_Number = @phone_Number,
+        id_kod = @id_kod,
+        birthday = @birthday,
+        password_user = @password_user,
+        registration_Date = @registration_Date,
+        photoData = @photoData
+    WHERE ID_Klient = @ID_Klient;
+END;
 
+-- ПРОЦЕДУРА 4.2
+-- оновлення поля в таблиці карт
+CREATE PROCEDURE update_bankingcard
+    @ID_Card INT,
+    @cardType NVARCHAR(50),
+    @cardNumber NVARCHAR(16),
+    @cvvCode NVARCHAR(3),
+    @balance DECIMAL(18, 2),
+    @currency NVARCHAR(10),
+    @paySystem NVARCHAR(50),
+    @cardDate DATE,
+    @pin INT,
+    @ID_Klient INT
+AS
+BEGIN
+    UPDATE BankingCard
+    SET cardType = @cardType,
+        cardNumber = @cardNumber,
+        cvvCode = @cvvCode,
+        balance = @balance,
+        currency = @currency,
+        paySystem = @paySystem,
+        cardDate = @cardDate,
+        pin = @pin,
+        ID_Klient = @ID_Klient
+    WHERE ID_Card = @ID_Card;
+END;
 
+-- ПРОЦЕДУРА 4.3
+-- оновлення поля в таблиці транзакцій
+CREATE PROCEDURE update_transactions
+    @ID_transaction INT,
+    @transactionType NVARCHAR(50),
+    @transactionDestination NVARCHAR(200),
+    @transactionDate DATE,
+    @transactionNumber NVARCHAR(50),
+    @transactionValue DECIMAL(18, 2),
+    @ID_Card INT
+AS
+BEGIN
+    UPDATE Transactions
+    SET transactionType = @transactionType,
+        transactionDestination = @transactionDestination,
+        transactionDate = @transactionDate,
+        transactionNumber = @transactionNumber,
+        transactionValue = @transactionValue,
+        ID_Card = @ID_Card
+    WHERE ID_transaction = @ID_transaction;
+END;
 
+-- ПРОЦЕДУРА 4.4
+-- оновлення поля в таблиці сервіси
+CREATE PROCEDURE update_services
+    @ID_Service INT,
+    @serviceName NVARCHAR(100),
+    @serviceBalance DECIMAL(18, 2),
+    @serviceType NVARCHAR(100)
+AS
+BEGIN
+    UPDATE Services
+    SET serviceName = @serviceName,
+        serviceBalance = @serviceBalance,
+        serviceType = @serviceType
+    WHERE ID_Service = @ID_Service;
+END;
+
+-- ПРОЦЕДУРА 4.5
+-- оновлення поля в таблиці кредити
+CREATE PROCEDURE update_credits
+    @ID_Credit INT,
+    @creditTotalSum DECIMAL(18, 2),
+    @creditSum DECIMAL(18, 2),
+    @creditDate DATE,
+    @creditStatus BIT,
+    @repaymentDate DATE,
+    @repaymentSum DECIMAL(18, 2),
+    @ID_Card INT
+AS
+BEGIN
+    UPDATE Credits
+    SET creditTotalSum = @creditTotalSum,
+        creditSum = @creditSum,
+        creditDate = @creditDate,
+        creditStatus = @creditStatus,
+        repaymentDate = @repaymentDate,
+        repaymentSum = @repaymentSum,
+        ID_Card = @ID_Card
+    WHERE ID_Credit = @ID_Credit;
+END;
+
+-- ПРОЦЕДУРА 4.6
+-- оновлення поля в таблиці депозити
+CREATE PROCEDURE update_deposits
+    @ID_Deposit INT,
+    @depositAmount DECIMAL(18, 2),
+    @depositDate DATE,
+    @interestRate DECIMAL(5, 2),
+    @termInMonths INT,
+    @isProcessed BIT,
+    @ID_Klient INT
+AS
+BEGIN
+    UPDATE Deposits
+    SET depositAmount = @depositAmount,
+        depositDate = @depositDate,
+        interestRate = @interestRate,
+        termInMonths = @termInMonths,
+        isProcessed = @isProcessed,
+        ID_Klient = @ID_Klient
+    WHERE ID_Deposit = @ID_Deposit;
+END;
+
+-- ПРОЦЕДУРА 5
+-- отримання інформації про клієнта
+CREATE PROCEDURE GetClientDetails
+    @ID_Klient INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Отримуємо дані клієнта
+    SELECT 
+        k.ID_Klient,
+        k.last_Name,
+        k.first_Name,
+        k.surname,
+        k.passport_Number,
+        k.phone_Number,
+        k.id_kod,
+        k.birthday,
+        k.registration_Date
+    FROM Klient k
+    WHERE k.ID_Klient = @ID_Klient;
+
+    -- Отримуємо дані банківських карт клієнта
+    SELECT 
+        b.ID_Card,
+        b.cardType,
+        b.cardNumber,
+        b.balance,
+        b.currency
+    FROM BankingCard b
+    WHERE b.ID_Klient = @ID_Klient;
+
+    -- Отримуємо дані депозитів клієнта
+    SELECT 
+        d.ID_Deposit,
+        d.depositAmount,
+        d.depositDate,
+        d.interestRate,
+        d.termInMonths,
+        d.isProcessed
+    FROM Deposits d
+    WHERE d.ID_Klient = @ID_Klient;
+
+    -- Отримуємо дані кредитів, пов’язаних із картами клієнта
+    SELECT 
+        c.ID_Credit,
+        c.creditTotalSum,
+        c.creditSum,
+        c.creditDate,
+        c.creditStatus,
+        c.repaymentDate
+    FROM Credits c
+    INNER JOIN BankingCard b ON c.ID_Card = b.ID_Card
+    WHERE b.ID_Klient = @ID_Klient;
+END;
 
 
 

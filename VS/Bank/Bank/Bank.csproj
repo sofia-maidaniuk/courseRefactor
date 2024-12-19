@@ -94,6 +94,9 @@
     </Compile>
     <Compile Include="Classes\Transaction.cs" />
     <Compile Include="Classes\TransferTransaction.cs" />
+    <Compile Include="ClientDetailsWindow.xaml.cs">
+      <DependentUpon>ClientDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Credit.xaml.cs">
       <DependentUpon>Credit.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChangePIB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClientDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
