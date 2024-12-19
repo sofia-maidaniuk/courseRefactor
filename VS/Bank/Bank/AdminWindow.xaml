@@ -75,6 +75,28 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+            
+            <Button x:Name="button_newInfoKlient" Content="Статистика клієнтів за певний період" FontFamily="Tenor Sans" Background="#03045E"  Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,170,0,0"
+            FontSize="33" Height="50" Width="700" Cursor="Hand" Click="OpenNewClientsWindow_Click" Foreground="White">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="30">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button x:Name="button_transactionView" Content="Перегляд транзакцій за категоріями" FontFamily="Tenor Sans" Background="#03045E"  Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,330,0,0"
+            FontSize="33" Height="50" Width="700" Cursor="Hand" Click="OpenTransactionView_Click" Foreground="White">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="30">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
         </Grid>
 

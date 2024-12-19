@@ -370,6 +370,95 @@ BEGIN
     FROM Credits c
     INNER JOIN BankingCard b ON c.ID_Card = b.ID_Card
     WHERE b.ID_Klient = @ID_Klient;
+
+	-- Отримуємо дані транзакцій, пов’язаних із картами клієнта
+    SELECT 
+        t.ID_transaction,
+        t.transactionType,
+        t.transactionDestination,
+        t.transactionDate,
+        t.transactionNumber,
+        t.transactionValue,
+        t.ID_Card
+    FROM Transactions t
+    INNER JOIN BankingCard b ON t.ID_Card = b.ID_Card
+    WHERE b.ID_Klient = @ID_Klient;
+END;
+
+DROP PROCEDURE GetClientDetails;
+
+
+-- ПРОЦЕДУРА 5
+-- пошук клієнта
+CREATE PROCEDURE SearchClients
+    @SearchTerm NVARCHAR(50)
+AS
+BEGIN
+    SELECT ID_Klient, first_Name, last_Name, surname, phone_Number
+    FROM Klient
+    WHERE 
+        last_Name LIKE @SearchTerm OR
+        first_Name LIKE @SearchTerm OR
+        surname LIKE @SearchTerm
+    ORDER BY last_Name, first_Name, surname;
+END;
+
+-- ПРОЦЕДУРА 6
+-- отримання клієнтів за певний період
+CREATE PROCEDURE GetNewClientsByDateRange
+    @StartDate DATE,
+    @EndDate DATE
+AS
+BEGIN
+    SELECT 
+        ID_Klient,
+        first_Name,
+        last_Name,
+        surname,
+        registration_Date
+    FROM Klient
+    WHERE registration_Date BETWEEN @StartDate AND @EndDate
+    ORDER BY registration_Date ASC;
+END;
+
+-- ПРОЦЕДУРА 7
+-- унікальні значення з колонки transactionType для заповнення ComboBox
+CREATE PROCEDURE GetTransactionTypes
+AS
+BEGIN
+    SELECT DISTINCT transactionType FROM Transactions;
+END;
+
+-- ПРОЦЕДУРА 8
+-- отримання транзакцій із можливістю фільтрувати за типом
+CREATE PROCEDURE GetTransactions
+    @TransactionType NVARCHAR(50) = NULL -- NULL означає, що фільтрація не використовується
+AS
+BEGIN
+    IF @TransactionType IS NULL
+        SELECT * FROM Transactions
+    ELSE
+        SELECT * FROM Transactions WHERE transactionType = @TransactionType;
+END;
+
+-- ПРОЦЕДУРА 9
+-- статистика для транзакції
+CREATE PROCEDURE GetTransactionStatistics
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Найпопулярніший тип транзакцій
+    SELECT TOP 1 transactionType, COUNT(*) AS TransactionCount
+    FROM Transactions
+    GROUP BY transactionType
+    ORDER BY COUNT(*) DESC;
+
+    -- Найменш популярний тип транзакцій
+    SELECT TOP 1 transactionType, COUNT(*) AS TransactionCount
+    FROM Transactions
+    GROUP BY transactionType
+    ORDER BY COUNT(*) ASC;
 END;
 
 

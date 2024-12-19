@@ -1,0 +1,43 @@
+﻿<Window x:Class="Bank.TransactionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="TransactionsWindow" Height="800" Width="1440">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FF03045E" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Photo/3.png" Width="110" Height="110" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,5,10,0"/>
+                <TextBlock Text="LABANK" Foreground="White" FontFamily="Tenor Sans" FontSize="36" Height="45" VerticalAlignment="Center" />
+                <Image Source="Photo/exit.png" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1080,0,10,0" MouseLeftButtonDown="Exit_Click" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Margin="250,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Border x:Name="toptransaction" Width="400" Height="120" CornerRadius="10" Background="#ADADC8"/>
+            <TextBlock Text="Найпопулярніший тип транзакції:" FontSize="20" FontFamily="Tenor Sans" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="MostPopularTransactionType" FontSize="30" Width="200" TextAlignment="Center"  FontFamily="Tenor Sans" Margin="0,50,0,10"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,10,250,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Border x:Name="badtransaction" Width="400" Height="120" CornerRadius="10" Background="#ADADC8"/>
+            <TextBlock Text="Найменш популярний тип транзакції:" FontSize="20" FontFamily="Tenor Sans" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="LeastPopularTransactionType" FontSize="30" Width="Auto" TextAlignment="Center"  FontFamily="Tenor Sans" Margin="0,50,0,10"/>
+        </Grid>
+        
+        <StackPanel Orientation="Horizontal" Margin="20" Grid.Row="2">
+            <TextBlock Text="Фільтр за типом транзакції:" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tenor Sans" FontSize="24"/>
+            <ComboBox x:Name="TransactionTypeComboBox" Width="200" SelectionChanged="TransactionTypeComboBox_SelectionChanged" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <DataGrid x:Name="TransactionsGrid" AutoGenerateColumns="True" Grid.Row="3" Margin="10"/>
+    </Grid>
+</Window>

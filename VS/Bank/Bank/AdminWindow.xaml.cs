@@ -94,7 +94,22 @@ namespace Bank
         {
             ClientDetailsWindow detailsWindow = new ClientDetailsWindow();
             detailsWindow.Show();
+            this.Close();
         }
+        private void OpenNewClientsWindow_Click(object sender, RoutedEventArgs e)
+        {
+            NewClientsWindow newClientsWindow = new NewClientsWindow();
+            newClientsWindow.Show();
+            this.Close();
+        }
+        
+        private void OpenTransactionView_Click(object sender, RoutedEventArgs e)
+        {
+            TransactionsWindow transactionsWindow = new TransactionsWindow();
+            transactionsWindow.Show();
+            this.Close();
+        }
+
 
     }
 }

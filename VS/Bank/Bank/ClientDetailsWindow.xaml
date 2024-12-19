@@ -54,6 +54,9 @@
             <TabItem Header="Кредити">
                 <DataGrid x:Name="CreditsGrid" AutoGenerateColumns="True"/>
             </TabItem>
+            <TabItem Header="Транзакції">
+                <DataGrid x:Name="TransactionsGrid" AutoGenerateColumns="True"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

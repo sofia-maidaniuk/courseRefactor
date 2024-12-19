@@ -337,14 +337,14 @@ namespace Bank
                 if (dataGrid.SelectedItem is DataRowView selectedRow)
                 {
                     var primaryKeys = new Dictionary<string, string>
-            {
-                { "Klient", "ID_Klient" },
-                { "BankingCard", "ID_Card" },
-                { "Transactions", "ID_transaction" },
-                { "Credits", "ID_Credit" },
-                { "Deposits", "ID_Deposit" },
-                { "Services", "ID_Service" }
-            };
+                    {
+                        { "Klient", "ID_Klient" },
+                        { "BankingCard", "ID_Card" },
+                        { "Transactions", "ID_transaction" },
+                        { "Credits", "ID_Credit" },
+                        { "Deposits", "ID_Deposit" },
+                        { "Services", "ID_Service" }
+                    };
 
                     string tableName = selectedTab.Header.ToString();
 
@@ -388,9 +388,9 @@ namespace Bank
                         if (editWindow.ShowDialog() == true)
                         {
                             var updatedData = new Dictionary<string, object>
-                    {
-                        { $"@{primaryKey}", id }
-                    };
+                            {
+                                { $"@{primaryKey}", id }
+                            };
 
                             for (int i = 0; i < parameters.Count; i++)
                             {

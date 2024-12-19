@@ -107,6 +107,12 @@ namespace Bank
                             {
                                 CreditsGrid.ItemsSource = dataSet.Tables[3].DefaultView;
                             }
+
+                            // Завантаження даних транзакцій клієнта
+                            if (dataSet.Tables.Count > 4)
+                            {
+                                TransactionsGrid.ItemsSource = dataSet.Tables[4].DefaultView;
+                            }
                         }
                     }
                 }
