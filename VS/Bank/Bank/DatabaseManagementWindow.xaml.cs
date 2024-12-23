@@ -436,14 +436,14 @@ namespace Bank
                 {
                     // Словник первинних ключів для таблиць
                     var primaryKeys = new Dictionary<string, string>
-                {
-                    { "Klient", "ID_Klient" },
-                    { "BankingCard", "ID_BankingCard" },
-                    { "Transactions", "ID_Transactions" },
-                    { "Credits", "ID_Credits" },
-                    { "Deposits", "ID_Deposit" },
-                    { "Services", "ID_Service" }
-                };
+                    {
+                        { "Klient", "ID_Klient" },
+                        { "BankingCard", "ID_BankingCard" },
+                        { "Transactions", "ID_transaction" },
+                        { "Credits", "ID_Credit" },
+                        { "Deposits", "ID_Deposit" },
+                        { "Services", "ID_Service" }
+                    };
 
                     string tableName = selectedTab.Header.ToString();
 

@@ -24,13 +24,13 @@
         <Grid Grid.Row="1" Margin="250,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Border x:Name="toptransaction" Width="400" Height="120" CornerRadius="10" Background="#ADADC8"/>
             <TextBlock Text="Найпопулярніший тип транзакції:" FontSize="20" FontFamily="Tenor Sans" Margin="0,10,0,0" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="MostPopularTransactionType" FontSize="30" Width="200" TextAlignment="Center"  FontFamily="Tenor Sans" Margin="0,50,0,10"/>
+            <TextBlock x:Name="MostPopularTransactionType" FontSize="22" Width="200" TextAlignment="Center"  FontFamily="Tenor Sans" Margin="0,50,0,10"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="0,10,250,0" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Border x:Name="badtransaction" Width="400" Height="120" CornerRadius="10" Background="#ADADC8"/>
             <TextBlock Text="Найменш популярний тип транзакції:" FontSize="20" FontFamily="Tenor Sans" Margin="0,10,0,0" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="LeastPopularTransactionType" FontSize="30" Width="Auto" TextAlignment="Center"  FontFamily="Tenor Sans" Margin="0,50,0,10"/>
+            <TextBlock x:Name="LeastPopularTransactionType" FontSize="22" Width="Auto" TextAlignment="Center"  FontFamily="Tenor Sans" Margin="0,50,0,10"/>
         </Grid>
         
         <StackPanel Orientation="Horizontal" Margin="20" Grid.Row="2">

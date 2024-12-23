@@ -110,7 +110,7 @@ namespace Bank
                         // Завантажуємо найпопулярніший тип транзакції
                         if (reader.HasRows && reader.Read())
                         {
-                            MostPopularTransactionType.Text = $"{reader["transactionType"]} ({reader["TransactionCount"]} транзакцій)";
+                            MostPopularTransactionType.Text = $"{reader["transactionType"]} ({reader["TransactionCount"]} шт.)";
                         }
                         else
                         {

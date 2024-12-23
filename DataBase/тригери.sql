@@ -16,7 +16,7 @@ BEGIN
 
     -- Додавання запису про транзакцію для депозиту в таблицю Transactions
     INSERT INTO Transactions (transactionType, transactionDestination, transactionDate, transactionNumber, transactionValue)
-    VALUES ('Deposit Created', 'Bank', GETDATE(), CONCAT('DP-', @ID_Deposit), @DepositAmount);
+    VALUES ('Оформлення депозиту', 'LaBank', GETDATE(), CONCAT('DP-', @ID_Deposit), @DepositAmount);
 END;
 
 SELECT name, is_disabled

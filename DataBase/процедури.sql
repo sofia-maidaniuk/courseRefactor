@@ -139,16 +139,18 @@ END;
 
 -- ПРОЦЕДУРА 3.3
 -- видалення поля з таблиці транзакції
-CREATE PROCEDURE delete_transaction
+CREATE PROCEDURE delete_transactions
     @id INT
 AS
 BEGIN
     DELETE FROM Transactions WHERE ID_transaction = @id;
 END;
 
+DROP PROCEDURE delete_credit
+
 -- ПРОЦЕДУРА 3.4
 -- видалення поля з таблиці кредитів
-CREATE PROCEDURE delete_credit
+CREATE PROCEDURE delete_credits
     @id INT
 AS
 BEGIN
@@ -385,16 +387,16 @@ BEGIN
     WHERE b.ID_Klient = @ID_Klient;
 END;
 
-DROP PROCEDURE GetClientDetails;
+DROP PROCEDURE SearchClients;
 
 
--- ПРОЦЕДУРА 5
+-- ПРОЦЕДУРА 6
 -- пошук клієнта
 CREATE PROCEDURE SearchClients
     @SearchTerm NVARCHAR(50)
 AS
 BEGIN
-    SELECT ID_Klient, first_Name, last_Name, surname, phone_Number
+    SELECT ID_Klient, last_Name, first_Name, surname, phone_Number
     FROM Klient
     WHERE 
         last_Name LIKE @SearchTerm OR
@@ -403,7 +405,7 @@ BEGIN
     ORDER BY last_Name, first_Name, surname;
 END;
 
--- ПРОЦЕДУРА 6
+-- ПРОЦЕДУРА 7
 -- отримання клієнтів за певний період
 CREATE PROCEDURE GetNewClientsByDateRange
     @StartDate DATE,
@@ -412,8 +414,8 @@ AS
 BEGIN
     SELECT 
         ID_Klient,
+		last_Name,
         first_Name,
-        last_Name,
         surname,
         registration_Date
     FROM Klient
@@ -421,7 +423,7 @@ BEGIN
     ORDER BY registration_Date ASC;
 END;
 
--- ПРОЦЕДУРА 7
+-- ПРОЦЕДУРА 8
 -- унікальні значення з колонки transactionType для заповнення ComboBox
 CREATE PROCEDURE GetTransactionTypes
 AS
@@ -429,7 +431,7 @@ BEGIN
     SELECT DISTINCT transactionType FROM Transactions;
 END;
 
--- ПРОЦЕДУРА 8
+-- ПРОЦЕДУРА 9
 -- отримання транзакцій із можливістю фільтрувати за типом
 CREATE PROCEDURE GetTransactions
     @TransactionType NVARCHAR(50) = NULL -- NULL означає, що фільтрація не використовується
@@ -441,7 +443,7 @@ BEGIN
         SELECT * FROM Transactions WHERE transactionType = @TransactionType;
 END;
 
--- ПРОЦЕДУРА 9
+-- ПРОЦЕДУРА 10
 -- статистика для транзакції
 CREATE PROCEDURE GetTransactionStatistics
 AS
