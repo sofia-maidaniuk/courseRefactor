@@ -22,10 +22,17 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <TabControl x:Name="tabs" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            </TabControl>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <TabControl x:Name="tabs" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                </TabControl>
+            </ScrollViewer>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="40">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="40">
                 <Button Content="Додати" Width="100" Click="Add_Record"/>
                 <Button Content="Редагувати" Width="100" Click="Upd_Record"/>
                 <Button Content="Видалити" Width="100" Click="Delete_Record"/>

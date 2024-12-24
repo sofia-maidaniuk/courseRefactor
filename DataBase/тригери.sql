@@ -171,7 +171,3 @@ BEGIN
     WHERE ID_Card IN (SELECT ID_Card FROM deleted);
 END;
 
-
-DELETE FROM Klient
-WHERE ID_Klient = 13;
-
