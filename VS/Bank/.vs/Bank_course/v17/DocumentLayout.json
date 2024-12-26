@@ -3,52 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\credit.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\credit.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\credit.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\credit.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\databasemanagementwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\databasemanagementwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\dataclasses\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\dataclasses\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\databasemanagementwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\databasemanagementwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\transactionlist.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\transactionlist.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\phone.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\phone.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\adminwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\adminwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\adminwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\adminwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\adminwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\adminwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\transactionlist.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\transactionlist.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\phone.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\phone.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\newclientswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\newclientswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\credit.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\credit.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\profil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\profil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|c:\\users\\msi\\desktop\\bankingaplication\\vs\\bank\\bank\\log_in.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\log_in.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\log_in.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\dataclasses\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\dataclasses\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\transactionswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -85,10 +81,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\log_in.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\log_in.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\bank\\dataclasses\\datastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD9BBB2E-C968-47E8-B986-EC4196F3D21B}|Bank\\Bank.csproj|solutionrelative:bank\\dataclasses\\datastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -98,7 +90,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -110,51 +102,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AdminWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AdminWindow.xaml",
-              "RelativeDocumentMoniker": "Bank\\AdminWindow.xaml",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AdminWindow.xaml",
-              "RelativeToolTip": "Bank\\AdminWindow.xaml",
+              "DocumentIndex": 1,
+              "Title": "Credit.xaml",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Credit.xaml",
+              "RelativeDocumentMoniker": "Bank\\Credit.xaml",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Credit.xaml",
+              "RelativeToolTip": "Bank\\Credit.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-26T00:18:22.443Z",
+              "WhenOpened": "2024-12-26T15:57:06.552Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Phone.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Phone.xaml.cs",
-              "RelativeDocumentMoniker": "Bank\\Phone.xaml.cs",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Phone.xaml.cs",
-              "RelativeToolTip": "Bank\\Phone.xaml.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAswLsAAABeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-25T23:08:43.486Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TransactionList.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\TransactionList.xaml.cs",
-              "RelativeDocumentMoniker": "Bank\\TransactionList.xaml.cs",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\TransactionList.xaml.cs",
-              "RelativeToolTip": "Bank\\TransactionList.xaml.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAkwFAAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-25T23:05:48.363Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 0,
               "Title": "Credit.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Credit.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\Credit.xaml.cs",
               "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Credit.xaml.cs",
               "RelativeToolTip": "Bank\\Credit.xaml.cs",
-              "ViewState": "AQIAAJ4AAAAAAAAAAAAswEMBAABBAAAA",
+              "ViewState": "AQIAAB8BAAAAAAAAAADwv14BAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-24T22:35:36.58Z",
               "EditorCaption": ""
@@ -167,27 +133,27 @@
               "RelativeDocumentMoniker": "Bank\\AdminWindow.xaml.cs",
               "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AdminWindow.xaml.cs",
               "RelativeToolTip": "Bank\\AdminWindow.xaml.cs",
-              "ViewState": "AQIAACIAAAAAAAAAAAAiwDwAAAAZAAAA",
+              "ViewState": "AQIAABQAAAAAAAAAAAAAwDoAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-10T19:16:11.365Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "DatabaseManagementWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\DatabaseManagementWindow.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\DatabaseManagementWindow.xaml.cs",
               "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\DatabaseManagementWindow.xaml.cs",
               "RelativeToolTip": "Bank\\DatabaseManagementWindow.xaml.cs",
-              "ViewState": "AQIAAFoBAAAAAAAAAAAmwC4BAAARAAAA",
+              "ViewState": "AQIAAK0BAAAAAAAAAAAgwCYBAABnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-11T20:51:43.405Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "DatabaseManagementWindow.xaml",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\DatabaseManagementWindow.xaml",
               "RelativeDocumentMoniker": "Bank\\DatabaseManagementWindow.xaml",
@@ -207,12 +173,11 @@
               "RelativeToolTip": "Bank\\Log_in.xaml.cs",
               "ViewState": "AQIAABsAAAAAAAAAAAAYwC4AAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-25T22:34:07.535Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-25T22:34:07.535Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "NewClientsWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\NewClientsWindow.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\NewClientsWindow.xaml.cs",
@@ -220,12 +185,49 @@
               "RelativeToolTip": "Bank\\NewClientsWindow.xaml.cs",
               "ViewState": "AQIAACQAAAAAAAAAAAAYwDIAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T21:11:57.141Z",
+              "WhenOpened": "2024-12-19T21:11:57.141Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DataBase.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\DataClasses\\DataBase.cs",
+              "RelativeDocumentMoniker": "Bank\\DataClasses\\DataBase.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\DataClasses\\DataBase.cs",
+              "RelativeToolTip": "Bank\\DataClasses\\DataBase.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAwA4AAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T06:24:46.049Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 6,
+              "Title": "TransactionList.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\TransactionList.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\TransactionList.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\TransactionList.xaml.cs",
+              "RelativeToolTip": "Bank\\TransactionList.xaml.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAkwFAAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T23:05:48.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Phone.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Phone.xaml.cs",
+              "RelativeDocumentMoniker": "Bank\\Phone.xaml.cs",
+              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Phone.xaml.cs",
+              "RelativeToolTip": "Bank\\Phone.xaml.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAswLsAAABeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T23:08:43.486Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "Profil.xaml",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Profil.xaml",
               "RelativeDocumentMoniker": "Bank\\Profil.xaml",
@@ -244,12 +246,11 @@
               "RelativeToolTip": "Bank\\Profil.xaml.cs",
               "ViewState": "AQIAAEQAAAAAAAAAAAAgwDoAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T13:49:48.182Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-23T13:49:48.182Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "ClientDetailsWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ClientDetailsWindow.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\ClientDetailsWindow.xaml.cs",
@@ -262,19 +263,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "DataBase.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\DataClasses\\DataBase.cs",
-              "RelativeDocumentMoniker": "Bank\\DataClasses\\DataBase.cs",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\DataClasses\\DataBase.cs",
-              "RelativeToolTip": "Bank\\DataClasses\\DataBase.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T06:24:46.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
               "Title": "TransactionsWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\TransactionsWindow.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\TransactionsWindow.xaml.cs",
@@ -286,7 +274,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "ClientDetailsWindow.xaml",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\ClientDetailsWindow.xaml",
               "RelativeDocumentMoniker": "Bank\\ClientDetailsWindow.xaml",
@@ -297,7 +285,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Bank\\MainWindow.xaml",
@@ -308,7 +296,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "Deposit.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Deposit.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\Deposit.xaml.cs",
@@ -320,7 +308,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "NewClientsWindow.xaml",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\NewClientsWindow.xaml",
               "RelativeDocumentMoniker": "Bank\\NewClientsWindow.xaml",
@@ -331,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\App.xaml.cs",
               "RelativeDocumentMoniker": "Bank\\App.xaml.cs",
@@ -343,19 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "DataStorage.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\DataClasses\\DataStorage.cs",
-              "RelativeDocumentMoniker": "Bank\\DataClasses\\DataStorage.cs",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\DataClasses\\DataStorage.cs",
-              "RelativeToolTip": "Bank\\DataClasses\\DataStorage.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T06:24:47.781Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "Log_in.xaml",
               "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\Log_in.xaml",
               "RelativeDocumentMoniker": "Bank\\Log_in.xaml",
@@ -373,40 +349,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "7ffe009d-11a4-4f1f-ae76-33d4ead79128",
-        "Display": 0,
-        "X": 0,
-        "Y": 64,
-        "Width": 800,
-        "Height": 600,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AdminWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AdminWindow.xaml",
-              "RelativeDocumentMoniker": "Bank\\AdminWindow.xaml",
-              "ToolTip": "C:\\Users\\MSI\\Desktop\\BankingAplication\\VS\\Bank\\Bank\\AdminWindow.xaml",
-              "RelativeToolTip": "Bank\\AdminWindow.xaml",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAACMAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-26T00:18:26.592Z",
-              "EditorCaption": ""
             }
           ]
         }

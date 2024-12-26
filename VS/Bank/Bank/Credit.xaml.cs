@@ -307,25 +307,22 @@ namespace Bank
             SqlTransaction dbTransaction = dataBase.getSqlConnection().BeginTransaction();
             try
             {
-                string querystringPayCredit = $"UPDATE Credits SET repaymentDate = @repaymentDate, creditSum = creditSum + @payment " +
+                // Оновлюємо лише кредити
+                string querystringPayCredit = $"UPDATE Credits SET repaymentDate = @repaymentDate, repaymentSum = ISNULL(repaymentSum, 0) + @payment " +
                     $"WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber)";
-                string querystringPay = $"UPDATE BankingCard SET balance = balance - @payment WHERE cardNumber = @cardNumber";
 
                 SqlCommand commandPayCredit = new SqlCommand(querystringPayCredit, dataBase.getSqlConnection(), dbTransaction);
                 commandPayCredit.Parameters.AddWithValue("@repaymentDate", toPayDate);
                 commandPayCredit.Parameters.AddWithValue("@payment", payment);
                 commandPayCredit.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
 
-                SqlCommand commandPay = new SqlCommand(querystringPay, dataBase.getSqlConnection(), dbTransaction);
-                commandPay.Parameters.AddWithValue("@payment", payment);
-                commandPay.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
-
                 int rowsAffected1 = commandPayCredit.ExecuteNonQuery();
-                int rowsAffected2 = commandPay.ExecuteNonQuery();
 
-                if (rowsAffected1 > 0 && rowsAffected2 > 0)
+                if (rowsAffected1 > 0)
                 {
+                    // Додаємо транзакцію для запису
                     CreateTransaction("Платіж по кредиту", payment, dbTransaction);
+
                     dbTransaction.Commit();
                     success = true;
                 }

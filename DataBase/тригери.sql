@@ -32,60 +32,53 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Тимчасові змінні для значень
     DECLARE @creditTotalSum DECIMAL(18, 2),
             @creditSum DECIMAL(18, 2),
             @repaymentSum DECIMAL(18, 2),
             @ID_Card INT,
-            @creditStatus BIT,
             @isInsert BIT;
 
-    -- Отримуємо значення з вставленого або оновленого запису
+    -- Отримуємо значення з INSERTED
     SELECT TOP 1
-        @creditTotalSum = INSERTED.creditTotalSum,
-        @creditSum = INSERTED.creditSum,
-        @repaymentSum = INSERTED.repaymentSum,
-        @ID_Card = INSERTED.ID_Card,
-        @creditStatus = INSERTED.creditStatus
+        @creditTotalSum = ISNULL(INSERTED.creditTotalSum, 0),
+        @creditSum = ISNULL(INSERTED.creditSum, 0),
+        @repaymentSum = ISNULL(INSERTED.repaymentSum, 0),
+        @ID_Card = INSERTED.ID_Card
     FROM INSERTED;
 
-    -- Перевірка, чи це новий запис (INSERT) чи оновлення (UPDATE)
+    -- Визначаємо, це INSERT чи UPDATE
     SELECT TOP 1 @isInsert = CASE WHEN DELETED.ID_Credit IS NULL THEN 1 ELSE 0 END
     FROM INSERTED
     LEFT JOIN DELETED ON INSERTED.ID_Credit = DELETED.ID_Credit;
 
-    -- Якщо новий запис (INSERT)
     IF @isInsert = 1
     BEGIN
-        -- Додаємо до балансу повну суму кредиту за вирахуванням виплаченої частини
+        -- Новий запис: додаємо загальну суму кредиту мінус виплати
         UPDATE BankingCard
-        SET balance = balance + (@creditTotalSum - ISNULL(@repaymentSum, 0))
+        SET balance = ISNULL(balance, 0) + (@creditTotalSum - @repaymentSum)
         WHERE ID_Card = @ID_Card;
     END
     ELSE
     BEGIN
-        -- Якщо оновлення запису (UPDATE)
+        -- Оновлення запису: враховуємо зміни у значеннях
         DECLARE @prevCreditTotalSum DECIMAL(18, 2),
                 @prevRepaymentSum DECIMAL(18, 2);
 
-        -- Отримуємо попередні значення
-        SELECT 
-            @prevCreditTotalSum = DELETED.creditTotalSum,
-            @prevRepaymentSum = DELETED.repaymentSum
-        FROM DELETED
-        WHERE DELETED.ID_Credit = @ID_Card;
+        SELECT TOP 1 
+            @prevCreditTotalSum = ISNULL(DELETED.creditTotalSum, 0),
+            @prevRepaymentSum = ISNULL(DELETED.repaymentSum, 0)
+        FROM DELETED;
 
-        -- Обчислюємо зміну в кредитній сумі та виплатах
-        DECLARE @totalChange DECIMAL(18, 2);
-        SET @totalChange = (@creditTotalSum - ISNULL(@repaymentSum, 0)) 
-                           - (@prevCreditTotalSum - ISNULL(@prevRepaymentSum, 0));
+        DECLARE @change DECIMAL(18, 2);
+        SET @change = ((@creditTotalSum - @repaymentSum) - (@prevCreditTotalSum - @prevRepaymentSum));
 
-        -- Оновлюємо баланс карти з урахуванням змін
         UPDATE BankingCard
-        SET balance = balance + @totalChange
+        SET balance = ISNULL(balance, 0) + @change
         WHERE ID_Card = @ID_Card;
     END
 END;
+
+
 
 -- ТРИГЕР 3
 -- автоматично списує кошти з банківської картки клієнта, коли створюється новий депозит у вікні адміна
