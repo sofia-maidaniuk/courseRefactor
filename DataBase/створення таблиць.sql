@@ -37,8 +37,6 @@ create table Transactions(
   transactionValue DECIMAL(18, 2)
 );
 
-update BankingCard set balance = 50000 where ID_Card=1
-
 alter table Transactions add ID_Card int
 alter table Transactions add foreign key (ID_Card) references dbo.BankingCard(ID_Card) on delete no action on update cascade
 

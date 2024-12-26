@@ -40,25 +40,21 @@ namespace Bank
                     // Виконання команди
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        // Читання кількості клієнтів
                         if (reader.HasRows && reader.Read())
                         {
                             textBlok_countKlient.Text = reader["TotalCountKlient"].ToString();
                         }
 
-                        // Перехід до наступного результату: кількість банківських карт
                         if (reader.NextResult() && reader.HasRows && reader.Read())
                         {
                             textBlok_countCard.Text = reader["TotalCountBankingCard"].ToString();
                         }
 
-                        // Перехід до наступного результату: кількість депозитів
                         if (reader.NextResult() && reader.HasRows && reader.Read())
                         {
                             textBlok_countDeposit.Text = reader["TotalCountDeposits"].ToString();
                         }
 
-                        // Перехід до наступного результату: кількість кредитів
                         if (reader.NextResult() && reader.HasRows && reader.Read())
                         {
                             textBlok_countCredit.Text = reader["TotalCountCredits"].ToString();
@@ -109,7 +105,5 @@ namespace Bank
             transactionsWindow.Show();
             this.Close();
         }
-
-
     }
 }
