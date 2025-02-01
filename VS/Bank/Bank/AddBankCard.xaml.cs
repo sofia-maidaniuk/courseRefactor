@@ -3,28 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Bank
 {
     public partial class AddBankCard : Window
     {
         private readonly int _clientId;
+        private readonly DataBase dataBase = new DataBase();
+        private readonly Random random = new Random();
 
-        DataBase dataBase = new DataBase();
-        Random random = new Random();
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataTable table = new DataTable();
         public AddBankCard(int clientId)
         {
             InitializeComponent();
@@ -37,89 +27,99 @@ namespace Bank
             currencyComboBox.SelectedIndex = 0;
             paySystemComboBox.SelectedIndex = 0;
         }
+
         private void button_createCard_Click(object sender, RoutedEventArgs e)
         {
-            var typeCardItem = typeCardComboBox.SelectedItem as ComboBoxItem;
-            var typeCard = typeCardItem.Content.ToString();
+            string pin;
+            if (!ValidatePasswords(out pin)) return;
 
-            var currencyItem = currencyComboBox.SelectedItem as ComboBoxItem;
-            var currency = currencyItem.Content.ToString();
+            var typeCard = ((ComboBoxItem)typeCardComboBox.SelectedItem).Content.ToString();
+            var currency = ((ComboBoxItem)currencyComboBox.SelectedItem).Content.ToString();
+            var paySystem = ((ComboBoxItem)paySystemComboBox.SelectedItem).Content.ToString();
 
-            var paySystemItem = paySystemComboBox.SelectedItem as ComboBoxItem;
-            var paySystem = paySystemItem.Content.ToString();
+            (string cardNumber, string cvvCode) = GenerateCardDetails(paySystem);
 
-            var cardNumber = "";
-            var cvvCode = "";
-            var pin = "";
-
-            string password1 = textBox_password.Text;
-            string password2 = textBox2_password.Text;
-
-            if (password1.Length != 4 || password2.Length != 4 || password1 != password2)
+            if (!IsCardNumberUnique(cardNumber))
             {
-                MessageBox.Show("Паролі не співпадають або не складаються з 4 символів. Будь ласка, введіть однакові паролі, кожен довжиною 4 символи.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Не вдалося згенерувати унікальний номер картки. Спробуйте ще раз.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (InsertBankCard(typeCard, cardNumber, cvvCode, currency, paySystem, pin))
+            {
+                MessageBox.Show("Карта успішно додана!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close();
             }
             else
             {
-                pin = password1;
+                MessageBox.Show("Карту не додано! Помилка!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
+        private bool ValidatePasswords(out string pin)
+        {
+            pin = textBox_password.Text;
+            string password2 = textBox2_password.Text;
 
-                bool isCardFree = false;
-                DateTime currentDate = DateTime.Now;
-                string formattedCurrentDate = currentDate.ToString("yyyy-MM-dd");
-                var cardDate = DateTime.Now.AddYears(4);
-                string formattedCardDate = cardDate.ToString("yyyy-MM-dd");
+            if (pin.Length != 4 || password2.Length != 4 || pin != password2)
+            {
+                MessageBox.Show("Паролі не співпадають або не складаються з 4 символів. Будь ласка, введіть однакові паролі.",
+                    "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+        }
 
-                for (int i = 0; i < 3; i++)
-                {
-                    cvvCode += Convert.ToString(random.Next(0, 10));
-                }
+        private (string cardNumber, string cvvCode) GenerateCardDetails(string paySystem)
+        {
+            string cardNumber = paySystem == "Visa" ? "4" : "5";
+            for (int i = 1; i < 16; i++)
+            {
+                cardNumber += random.Next(0, 10).ToString();
+            }
 
-                do
-                {
-                    if (paySystem == "Visa")
-                    {
-                        cardNumber += "4";
-                        for (int i = 0; i < 15; i++)
-                        {
-                            cardNumber += Convert.ToString(random.Next(0, 10));
-                        }
-                    }
-                    else
-                    {
-                        cardNumber += "5";
-                        for (int i = 0; i < 15; i++)
-                        {
-                            cardNumber += Convert.ToString(random.Next(0, 10));
-                        }
-                    }
+            string cvvCode = "";
+            for (int i = 0; i < 3; i++)
+            {
+                cvvCode += random.Next(0, 10).ToString();
+            }
 
-                    var querystring_CheckBankCard = $"select * from BankingCard where CardNumber = '{cardNumber}'";
+            return (cardNumber, cvvCode);
+        }
 
-                    SqlCommand command_CheckBankCard = new SqlCommand(querystring_CheckBankCard, dataBase.getSqlConnection());
-                    adapter.SelectCommand = command_CheckBankCard;
-                    adapter.Fill(table);
-                    if (table.Rows.Count == 0)
-                    {
-                        isCardFree = true;
-                    }
-                } while (isCardFree == false);
-
-                var querystring_AddBankCard = $"insert into BankingCard(cardType, cardNumber, cvvCode, balance, currency, paySystem, cardDate, pin, ID_Klient) " +
-                $"values ('{typeCard}', '{cardNumber}', '{cvvCode}', '{0}', '{currency}', '{paySystem}', '{formattedCardDate}', '{pin}', '{_clientId}' )";
-
-                SqlCommand command_AddBankCard = new SqlCommand(querystring_AddBankCard, dataBase.getSqlConnection());
+        private bool IsCardNumberUnique(string cardNumber)
+        {
+            string query = "SELECT COUNT(*) FROM BankingCard WHERE CardNumber = @cardNumber";
+            using (var command = new SqlCommand(query, dataBase.getSqlConnection()))
+            {
+                command.Parameters.AddWithValue("@cardNumber", cardNumber);
                 dataBase.openConnection();
-
-                if (command_AddBankCard.ExecuteNonQuery() == 1)
-                {
-                    MessageBox.Show("Карта успішно додана!", "Успішно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
-                }
-                else
-                    MessageBox.Show("Карту не додано! Помилка!", "Додавання не вдалось!", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                int count = (int)command.ExecuteScalar();
                 dataBase.closeConnection();
+                return count == 0;
+            }
+        }
+
+        private bool InsertBankCard(string typeCard, string cardNumber, string cvvCode, string currency, string paySystem, string pin)
+        {
+            string query = "INSERT INTO BankingCard(cardType, cardNumber, cvvCode, balance, currency, paySystem, cardDate, pin, ID_Klient) " +
+                           "VALUES (@typeCard, @cardNumber, @cvvCode, 0, @currency, @paySystem, @cardDate, @pin, @clientId)";
+
+            using (var command = new SqlCommand(query, dataBase.getSqlConnection()))
+            {
+                command.Parameters.AddWithValue("@typeCard", typeCard);
+                command.Parameters.AddWithValue("@cardNumber", cardNumber);
+                command.Parameters.AddWithValue("@cvvCode", cvvCode);
+                command.Parameters.AddWithValue("@currency", currency);
+                command.Parameters.AddWithValue("@paySystem", paySystem);
+                command.Parameters.AddWithValue("@cardDate", DateTime.Now.AddYears(4).ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@pin", pin);
+                command.Parameters.AddWithValue("@clientId", _clientId);
+
+                dataBase.openConnection();
+                int result = command.ExecuteNonQuery();
+                dataBase.closeConnection();
+                return result == 1;
             }
         }
 
