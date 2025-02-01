@@ -36,12 +36,13 @@ namespace Bank
             DateTime date = new DateTime();
             StackPanelCredit.Visibility = Visibility.Hidden;
             button_pay.Visibility = Visibility.Hidden;
+            payCredit.Visibility = Visibility.Hidden;
             string idCredit = "";
 
             double totalSumCheck = 0;
             double sumCheck = 0;
 
-            string querystringCredit = $"SELECT creditTotalSum, creditSum FROM Credits WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = '{DataStorage.cardNumber}')";
+            string querystringCredit = $"SELECT creditTotalSum, creditSum, ID_Credit FROM Credits WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = '{DataStorage.cardNumber}')";
             SqlCommand commandCheck = new SqlCommand(querystringCredit, dataBase.getSqlConnection());
             dataBase.openConnection();
             SqlDataReader reader = commandCheck.ExecuteReader();
@@ -49,26 +50,35 @@ namespace Bank
             {
                 totalSumCheck = reader.IsDBNull(0) ? 0 : Convert.ToDouble(reader[0]);
                 sumCheck = reader.IsDBNull(1) ? 0 : Convert.ToDouble(reader[1]);
+                idCredit = reader[2].ToString();
             }
             reader.Close();
 
+            // Якщо кредит повністю погашений - видаляємо його
             if (sumCheck >= totalSumCheck)
             {
                 string querystringDelete = $"DELETE FROM Credits WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = '{DataStorage.cardNumber}')";
                 SqlCommand commandDelete = new SqlCommand(querystringDelete, dataBase.getSqlConnection());
                 commandDelete.ExecuteNonQuery();
+
+                // Після видалення ховаємо панелі
+                StackPanelCredit.Visibility = Visibility.Hidden;
+                button_pay.Visibility = Visibility.Hidden;
+                payCredit.Visibility = Visibility.Hidden;
+
+                dataBase.closeConnection();
+                return;
             }
 
-            string querySelectIdCard = $"SELECT Credits.ID_Card, Credits.creditTotalSum, Credits.creditSum, Credits.creditDate, Credits.ID_Credit " +
+            string querySelectIdCard = $"SELECT Credits.creditTotalSum, Credits.creditSum, Credits.creditDate " +
                 $"FROM Credits INNER JOIN BankingCard ON Credits.ID_Card = BankingCard.ID_Card WHERE BankingCard.cardNumber = '{DataStorage.cardNumber}'";
             SqlCommand commandSelectCredit = new SqlCommand(querySelectIdCard, dataBase.getSqlConnection());
             SqlDataReader reader1 = commandSelectCredit.ExecuteReader();
             while (reader1.Read())
             {
-                totalSum = reader1.IsDBNull(1) ? "0" : reader1[1].ToString();
-                sum = reader1.IsDBNull(2) ? "0" : reader1[2].ToString();
-                date = reader1.IsDBNull(3) ? DateTime.MinValue : Convert.ToDateTime(reader1[3]);
-                idCredit = reader1[4].ToString();
+                totalSum = reader1.IsDBNull(0) ? "0" : reader1[0].ToString();
+                sum = reader1.IsDBNull(1) ? "0" : reader1[1].ToString();
+                date = reader1.IsDBNull(2) ? DateTime.MinValue : Convert.ToDateTime(reader1[2]);
             }
             reader1.Close();
 
@@ -82,6 +92,7 @@ namespace Bank
 
                 StackPanelCredit.Visibility = Visibility.Visible;
                 button_pay.Visibility = Visibility.Visible;
+                payCredit.Visibility = Visibility.Visible;
 
                 LoadRepaymentData(idCredit);
             }
@@ -99,22 +110,23 @@ namespace Bank
 
         private void LoadRepaymentData(string idCredit)
         {
-            double toPaySum = 0;
-            DateTime dateRepay = new DateTime();
+            double monthPay = 0;
+            DateTime dateRepay = DateTime.MinValue;
 
             string querystringRepay = $"SELECT repaymentDate, repaymentSum FROM Credits WHERE ID_Credit = '{idCredit}'";
             SqlCommand commandRepay = new SqlCommand(querystringRepay, dataBase.getSqlConnection());
             SqlDataReader reader2 = commandRepay.ExecuteReader();
-            while (reader2.Read())
+            if (reader2.Read())
             {
-                dateRepay = Convert.ToDateTime(reader2[0].ToString());
-                toPaySum = Convert.ToDouble(reader2[1].ToString());
+                dateRepay = Convert.ToDateTime(reader2["repaymentDate"]);
+                monthPay = Convert.ToDouble(reader2["repaymentSum"]); 
             }
             reader2.Close();
 
-            label_toPaySum.Content = Math.Round(toPaySum, 2).ToString();
+            label_toPaySum.Content = Math.Round(monthPay, 2).ToString();
             label_nextPayDate.Content = dateRepay.ToShortDateString();
         }
+
 
         private void button_take_Click(object sender, RoutedEventArgs e)
         {
@@ -248,89 +260,113 @@ namespace Bank
 
         private void button_payment_Click(object sender, RoutedEventArgs e)
         {
-            DateTime toPayDate = Convert.ToDateTime(label_nextPayDate.Content);
-            toPayDate = toPayDate.AddMonths(1);
-            double sumToPay = Convert.ToDouble(label_toPaySum.Content);
-            bool error = false;
-
             dataBase.openConnection();
+
+            // Отримуємо залишок балансу картки
             double cardBalanceCheck = 0;
-            string querystringCheckCard = $"SELECT balance FROM BankingCard WHERE cardNumber = '{DataStorage.cardNumber}'";
+            string querystringCheckCard = "SELECT balance FROM BankingCard WHERE cardNumber = @cardNumber";
             SqlCommand commandCheckCard = new SqlCommand(querystringCheckCard, dataBase.getSqlConnection());
+            commandCheckCard.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
+
             SqlDataReader reader = commandCheckCard.ExecuteReader();
-            while (reader.Read())
+            if (reader.Read())
             {
                 cardBalanceCheck = Convert.ToDouble(reader[0]);
             }
             reader.Close();
 
-            double checkSum = Convert.ToDouble(label_toPaySum.Content);
-            double checkTotalSum = Convert.ToDouble(label_totalSum.Content);
-            bool check = false;
+            // Отримуємо дані кредиту
+            double totalSum = 0, paidSum = 0, nextPayment = 0;
+            DateTime nextPayDate = DateTime.MinValue;
 
+            string queryCredit = "SELECT creditTotalSum, creditSum, repaymentSum, repaymentDate FROM Credits WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber)";
+            SqlCommand commandCredit = new SqlCommand(queryCredit, dataBase.getSqlConnection());
+            commandCredit.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
 
-            if (checkSum == checkTotalSum)
+            SqlDataReader creditReader = commandCredit.ExecuteReader();
+            if (creditReader.Read())
             {
-                StackPanelCredit.Visibility = Visibility.Hidden;
-                button_pay.Visibility = Visibility.Hidden;
+                totalSum = Convert.ToDouble(creditReader["creditTotalSum"]);
+                paidSum = Convert.ToDouble(creditReader["creditSum"]);
+                nextPayment = Convert.ToDouble(creditReader["repaymentSum"]);
+                nextPayDate = Convert.ToDateTime(creditReader["repaymentDate"]);
+            }
+            creditReader.Close();
 
-                MessageBox.Show("Кредит погашено", "Сповіщення", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                ClearCreditData();
+            // Якщо баланс недостатній - виводимо помилку
+            if (nextPayment > cardBalanceCheck)
+            {
+                MessageBox.Show("Недостатньо коштів на картці", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 dataBase.closeConnection();
-                Close();
                 return;
             }
 
-
-            if (!check)
-            {
-                double payment = Convert.ToDouble(label_toPaySum.Content);
-
-                if (payment > cardBalanceCheck)
-                {
-                    MessageBox.Show("Недостатньо коштів на картці", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    error = true;
-                }
-
-                if (!error)
-                {
-                    ProcessPayment(toPayDate, payment);
-                }
-            }
+            // Виконуємо платіж
+            ProcessPayment(nextPayDate, nextPayment);
         }
+
 
         private void ProcessPayment(DateTime toPayDate, double payment)
         {
             bool success = false;
-
             SqlTransaction dbTransaction = dataBase.getSqlConnection().BeginTransaction();
+
             try
             {
-                // Оновлюємо лише кредити
-                string querystringPayCredit = $"UPDATE Credits SET repaymentDate = @repaymentDate, repaymentSum = ISNULL(repaymentSum, 0) + @payment " +
-                    $"WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber)";
+                // Оновлюємо виплачену суму та дату наступного платежу
+                string queryUpdateCredit = @"
+            UPDATE Credits 
+            SET repaymentDate = DATEADD(MONTH, 1, repaymentDate), 
+                repaymentSum = @payment, 
+                creditSum = creditSum + @payment 
+            WHERE ID_Credit = (SELECT ID_Credit FROM Credits WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber))";
 
-                SqlCommand commandPayCredit = new SqlCommand(querystringPayCredit, dataBase.getSqlConnection(), dbTransaction);
-                commandPayCredit.Parameters.AddWithValue("@repaymentDate", toPayDate);
-                commandPayCredit.Parameters.AddWithValue("@payment", payment);
-                commandPayCredit.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
+                SqlCommand commandUpdateCredit = new SqlCommand(queryUpdateCredit, dataBase.getSqlConnection(), dbTransaction);
+                commandUpdateCredit.Parameters.AddWithValue("@payment", payment);
+                commandUpdateCredit.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
+                commandUpdateCredit.ExecuteNonQuery();
 
-                int rowsAffected1 = commandPayCredit.ExecuteNonQuery();
+                // Створюємо транзакцію
+                CreateTransaction("Платіж по кредиту", payment, dbTransaction);
 
-                if (rowsAffected1 > 0)
+                // Оновлюємо баланс картки (списуємо гроші)
+                string queryUpdateBalance = "UPDATE BankingCard SET balance = balance - @payment WHERE cardNumber = @cardNumber";
+                SqlCommand commandUpdateBalance = new SqlCommand(queryUpdateBalance, dataBase.getSqlConnection(), dbTransaction);
+                commandUpdateBalance.Parameters.AddWithValue("@payment", payment);
+                commandUpdateBalance.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
+                commandUpdateBalance.ExecuteNonQuery();
+
+                // Перевіряємо, чи повністю виплачено кредит
+                double creditSum = 0, totalSum = 0;
+                string checkCreditQuery = "SELECT creditSum, creditTotalSum FROM Credits WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber)";
+                SqlCommand checkCreditCommand = new SqlCommand(checkCreditQuery, dataBase.getSqlConnection(), dbTransaction);
+                checkCreditCommand.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
+
+                SqlDataReader reader = checkCreditCommand.ExecuteReader();
+                if (reader.Read())
                 {
-                    // Додаємо транзакцію для запису
-                    CreateTransaction("Платіж по кредиту", payment, dbTransaction);
+                    creditSum = Convert.ToDouble(reader["creditSum"]);
+                    totalSum = Convert.ToDouble(reader["creditTotalSum"]);
+                }
+                reader.Close();
 
-                    dbTransaction.Commit();
-                    success = true;
-                }
-                else
+                if (creditSum >= totalSum)
                 {
-                    dbTransaction.Rollback();
-                    MessageBox.Show("Помилка під час виконання транзакції.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    // Видаляємо кредит, якщо все виплачено
+                    string deleteCreditQuery = "DELETE FROM Credits WHERE ID_Card = (SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber)";
+                    SqlCommand deleteCreditCommand = new SqlCommand(deleteCreditQuery, dataBase.getSqlConnection(), dbTransaction);
+                    deleteCreditCommand.Parameters.AddWithValue("@cardNumber", DataStorage.cardNumber);
+                    deleteCreditCommand.ExecuteNonQuery();
+
+                    StackPanelCredit.Visibility = Visibility.Hidden;
+                    button_pay.Visibility = Visibility.Hidden;
+                    payCredit.Visibility = Visibility.Hidden;
+
+                    MessageBox.Show("Кредит повністю погашено.", "Інформація", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+
+                dbTransaction.Commit();
+                success = true;
             }
             catch (Exception ex)
             {
@@ -344,7 +380,7 @@ namespace Bank
 
             if (success)
             {
-                MessageBox.Show("Транзакція успішно завершена.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Платіж успішно виконано.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                 LoadCreditData();
             }
         }
