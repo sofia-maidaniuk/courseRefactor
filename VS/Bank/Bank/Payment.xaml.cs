@@ -7,6 +7,8 @@ using Bank.DataClasses;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
 using Bank.Classes;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Bank
 {
@@ -21,8 +23,6 @@ namespace Bank
 
         DataBase dataBase = new DataBase();
         Random random = new Random();
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataTable table = new DataTable();
 
         public Payment(int clientId, string bankCard, string cardNumber, string cvvCode, string expiryDate)
         {
@@ -49,11 +49,9 @@ namespace Bank
             dataBase.openConnection();
 
             using (SqlCommand command = new SqlCommand(querystringServices, dataBase.getSqlConnection()))
+            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
             {
-                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                {
-                    adapter.Fill(services);
-                }
+                adapter.Fill(services);
             }
 
             dataBase.closeConnection();
@@ -82,181 +80,158 @@ namespace Bank
             }
         }
 
-        private void button_payment_Click(object sender, RoutedEventArgs e)
+        private int ExecuteNonQuery(string query, Dictionary<string, object> parameters, SqlTransaction transaction = null)
         {
+            using (var command = new SqlCommand(query, dataBase.getSqlConnection(), transaction))
+            {
+                foreach (var param in parameters)
+                {
+                    command.Parameters.AddWithValue(param.Key, param.Value);
+                }
+                return command.ExecuteNonQuery();
+            }
+        }
+
+        private bool ValidateInputs(out double sum)
+        {
+            sum = 0;
+
             if (servicesComboBox.SelectedIndex == 0 || string.IsNullOrEmpty(selectedServiceName))
             {
                 MessageBox.Show("Будь ласка, виберіть послугу.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return false;
             }
 
-            var cardNumber = textBox_cardNumber.Text;
-            var cvvCode = textBox_cvvCode.Text;
-            var cardDate = textBox_date.Text;
-
-            var cvvCodeCheck = "";
-            var cardDateCheck = "";
-            var currency = "";
-            double cardBalanceCheck = 0;
-            bool error = false;
-
-            if (!double.TryParse(textBox_sum.Text, out double sum))
+            if (!double.TryParse(textBox_sum.Text, out sum))
             {
                 MessageBox.Show("Будь ласка, введіть коректну суму.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return false;
             }
-
-            MessageBoxButton btn = MessageBoxButton.OK;
-            MessageBoxImage img = MessageBoxImage.Information;
-
-            string caption = "Дата збереження";
 
             if (!Regex.IsMatch(textBox_bill.Text, "^UA[0-9]{27}$"))
             {
-                MessageBox.Show("Номер рахунку повинен мати такий формат UAXXXXXXXXXXXXXXXXXXXXXXXXXXX", caption, btn, img);
-                textBox_bill.Focus();
+                MessageBox.Show("Номер рахунку повинен мати формат UAXXXXXXXXXXXXXXXXXXXXXXXXXXX", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckCardDetails(out double cardBalance, out string currency)
+        {
+            cardBalance = 0;
+            currency = "";
+
+            string queryCheckCard = "SELECT cvvCode, CONCAT(FORMAT(cardDate, '%M'),'/', FORMAT(cardDate, '%y')), balance, currency FROM BankingCard WHERE cardNumber = @cardNumber";
+
+            dataBase.openConnection();
+            using (var command = new SqlCommand(queryCheckCard, dataBase.getSqlConnection()))
+            {
+                command.Parameters.AddWithValue("@cardNumber", textBox_cardNumber.Text);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        if (textBox_cvvCode.Text != reader[0].ToString() ||
+                            textBox_date.Text != reader[1].ToString())
+                        {
+                            MessageBox.Show("Невірні дані картки.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return false;
+                        }
+
+                        cardBalance = Convert.ToDouble(reader[2]);
+                        currency = reader[3].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Картку не знайдено.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private bool IsValidCurrency(string currency)
+        {
+            if (currency == "USD" || currency == "EUR")
+            {
+                MessageBox.Show("Можливі тільки перекази в гривнях.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private void ProcessTransaction(double totalAmount, double sum)
+        {
+            DateTime transactionDate = DateTime.Now;
+            var transactionNumber = "P" + new string(Enumerable.Range(0, 10).Select(_ => random.Next(0, 10).ToString()[0]).ToArray());
+
+            dataBase.openConnection();
+            SqlTransaction dbTransaction = dataBase.getSqlConnection().BeginTransaction();
+
+            try
+            {
+                ExecuteNonQuery("UPDATE BankingCard SET balance = balance - @totalAmount WHERE cardNumber = @cardNumber",
+                    new Dictionary<string, object>
+                    {
+                        {"@totalAmount", totalAmount},
+                        {"@cardNumber", textBox_cardNumber.Text}
+                    },
+                    dbTransaction);
+
+                ExecuteNonQuery("INSERT INTO Transactions (transactionType, transactionDestination, transactionDate, transactionNumber, transactionValue, ID_Card) " +
+                                "VALUES (@transactionType, @transactionDestination, @transactionDate, @transactionNumber, @totalAmount, " +
+                                "(SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber))",
+                    new Dictionary<string, object>
+                    {
+                        {"@transactionType", selectedServiceName},
+                        {"@transactionDestination", textBox_bill.Text},
+                        {"@transactionDate", transactionDate},
+                        {"@transactionNumber", transactionNumber},
+                        {"@totalAmount", totalAmount},
+                        {"@cardNumber", textBox_cardNumber.Text}
+                    },
+                    dbTransaction);
+
+                ExecuteNonQuery("UPDATE Services SET serviceBalance = serviceBalance + @sum WHERE serviceName = @selectedServiceName",
+                    new Dictionary<string, object>
+                    {
+                        {"@sum", sum},
+                        {"@selectedServiceName", selectedServiceName}
+                    },
+                    dbTransaction);
+
+                dbTransaction.Commit();
+                MessageBox.Show("Транзакція успішно завершена.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                dbTransaction.Rollback();
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                dataBase.closeConnection();
+            }
+        }
+
+        private void button_payment_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateInputs(out double sum)) return;
+            if (!CheckCardDetails(out double cardBalance, out string currency)) return;
+            if (!IsValidCurrency(currency)) return;
+
+            double totalAmount = sum * 1.01;
+
+            if (totalAmount > cardBalance)
+            {
+                MessageBox.Show("Недостатньо коштів на картці.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            string queryCheckCard = $"select cvvCode, CONCAT(FORMAT(cardDate, '%M'),'/', FORMAT(cardDate, '%y')), " +
-                    $"balance, currency from BankingCard where cardNumber = @cardNumber";
-
-            SqlCommand commandCheckCard = new SqlCommand(queryCheckCard, dataBase.getSqlConnection());
-            commandCheckCard.Parameters.AddWithValue("@cardNumber", cardNumber);
-            dataBase.openConnection();
-            SqlDataReader reader = commandCheckCard.ExecuteReader();
-
-            while (reader.Read())
-            {
-                cvvCodeCheck = reader[0].ToString();
-                cardDateCheck = reader[1].ToString();
-                cardBalanceCheck = Convert.ToDouble(reader[2].ToString());
-                currency = reader[3].ToString();
-            }
-            reader.Close();
-
-            if (string.IsNullOrEmpty(cardNumber))
-            {
-                MessageBox.Show("Введіть дані картки.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                error = true;
-            }
-
-            if (currency == "USD" || currency == "EUR")
-            {
-                MessageBox.Show("Вибачте, але можливі тільки перекази в гривнях.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                error = true;
-            }
-
-            if (cvvCode != cvvCodeCheck)
-            {
-                MessageBox.Show("Невірний CVV код.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                error = true;
-            }
-
-            if (cardDate != cardDateCheck)
-            {
-                MessageBox.Show("Невірний термін дії картки.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                error = true;
-            }
-
-            if (!error)
-            {
-                DataStorage.bankCard = textBox_cardNumber.Text;
-                Validation validation = new Validation();
-                validation.ShowDialog();
-
-                if (DataStorage.attempts > 0)
-                {
-                    DateTime transactionDate = DateTime.Now;
-                    var transactionNumber = "P";
-                    for (int i = 0; i < 10; i++)
-                    {
-                        transactionNumber += random.Next(0, 10).ToString();
-                    }
-
-                    double commissionRate = 0.01;
-                    TransferTransaction transaction = new TransferTransaction(commissionRate)
-                    {
-                        TransactionType = selectedServiceName,
-                        TransactionDestination = textBox_bill.Text,
-                        TransactionDate = transactionDate,
-                        TransactionNumber = transactionNumber,
-                        TransactionValue = sum
-                    };
-
-                    double totalAmount = transaction.CalculateTotalAmount();
-
-                    if (totalAmount > cardBalanceCheck)
-                    {
-                        MessageBox.Show("Недостатньо коштів на картці.", "Відміна", MessageBoxButton.OK, MessageBoxImage.Information);
-                        return;
-                    }
-
-                    if (totalAmount < 5)
-                    {
-                        MessageBox.Show("Мінімальна сума переказу 5 гривень.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-
-                    var queryPayment = "update BankingCard set balance = balance - @totalAmount where cardNumber = @cardNumber";
-                    var queryTransaction = "INSERT INTO Transactions (transactionType, transactionDestination, transactionDate, transactionNumber, transactionValue, ID_Card) " +
-                        "VALUES (@transactionType, @transactionDestination, @transactionDate, @transactionNumber, @totalAmount, " +
-                        "(SELECT ID_Card FROM BankingCard WHERE cardNumber = @cardNumber))";
-                    var queryService = "update Services set serviceBalance = serviceBalance + @sum where serviceName = @selectedServiceName";
-
-                    var commandPayment1 = new SqlCommand(queryPayment, dataBase.getSqlConnection());
-                    commandPayment1.Parameters.AddWithValue("@totalAmount", totalAmount);
-                    commandPayment1.Parameters.AddWithValue("@cardNumber", cardNumber);
-
-                    var commandTransaction = new SqlCommand(queryTransaction, dataBase.getSqlConnection());
-                    commandTransaction.Parameters.AddWithValue("@transactionType", transaction.TransactionType);
-                    commandTransaction.Parameters.AddWithValue("@transactionDestination", transaction.TransactionDestination);
-                    commandTransaction.Parameters.AddWithValue("@transactionDate", transaction.TransactionDate);
-                    commandTransaction.Parameters.AddWithValue("@transactionNumber", transaction.TransactionNumber);
-                    commandTransaction.Parameters.AddWithValue("@totalAmount", totalAmount);
-                    commandTransaction.Parameters.AddWithValue("@cardNumber", cardNumber);
-
-                    var commandService = new SqlCommand(queryService, dataBase.getSqlConnection());
-                    commandService.Parameters.AddWithValue("@sum", sum);
-                    commandService.Parameters.AddWithValue("@selectedServiceName", selectedServiceName);
-
-                    dataBase.openConnection();
-
-                    SqlTransaction dbTransaction = dataBase.getSqlConnection().BeginTransaction();
-                    commandPayment1.Transaction = dbTransaction;
-                    commandTransaction.Transaction = dbTransaction;
-                    commandService.Transaction = dbTransaction;
-
-                    try
-                    {
-                        int rowsAffected1 = commandPayment1.ExecuteNonQuery();
-                        int rowsAffected2 = commandTransaction.ExecuteNonQuery();
-                        int rowsAffected3 = commandService.ExecuteNonQuery();
-
-                        if (rowsAffected1 > 0 && rowsAffected2 > 0 && rowsAffected3 > 0)
-                        {
-                            dbTransaction.Commit();
-                            MessageBox.Show("Транзакція успішно завершена.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        else
-                        {
-                            dbTransaction.Rollback();
-                            MessageBox.Show("Помилка під час виконання транзакції.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        dbTransaction.Rollback();
-                        MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    finally
-                    {
-                        dataBase.closeConnection();
-                    }
-
-                    Close();
-                }
-            }
+            ProcessTransaction(totalAmount, sum);
+            Close();
         }
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)
